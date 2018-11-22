@@ -1,14 +1,22 @@
 # Super Progressive Web Apps
-<p>
-    <a href="https://twitter.com/intent/follow?screen_name=superpwa">
-		<img src="https://img.shields.io/twitter/follow/superpwa.svg?style=social&logo=twitter" alt="follow SuperPWA on Twitter">
-	</a>
-	<a href="https://github.com/SuperPWA/Super-Progressive-Web-Apps">
-		<img src="https://img.shields.io/github/stars/SuperPWA/Super-Progressive-Web-Apps.svg?style=social&logo=github&label=SuperPWA" alt="Star Super Progressive Web Apps">
-	</a>	
 
+### This is a fork of the original plugin with composer support and enhancements
 
-</p>
+### Installation
+
+```bash
+composer require lipemat/super-progressive-web-apps
+```
+### Usage
+
+``` php
+require __DIR__ . '/vendor/autoload.php'
+```
+
+### Enhancements (non exhaustive)
+1. Support WP as a sub directory via filter `superpwa_output_path`.
+
+-------------------------
 
 <p align="center">
   <a href="https://superpwa.com/?utm_source=GitHub&utm_medium=Readme-SuperPWALogo">
