@@ -1,0 +1,19 @@
+{
+  "name": "lipemat/super-progressive-web-apps",
+  "description": "Convert your WordPress website into a Progressive Web App",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mat Lipe",
+      "email": "mat@matlipe.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {},
+  "autoload": {
+    "files": [
+      "superpwa.php"
+    ]
+  }
+}
