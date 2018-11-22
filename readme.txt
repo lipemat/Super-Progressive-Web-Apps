@@ -1,11 +1,11 @@
 === Super Progressive Web Apps ===
-Contributors: arunbasillal, josevarghese, superpwa
+Contributors: arunbasillal, josevarghese, superpwa, mat-lipe
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
-Requires at least: 3.6.0
-Tested up to: 4.9.7
+Requires at least: 4.4.0
+Tested up to: 4.9.8
 Requires PHP: 5.3
-Stable tag: trunk
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

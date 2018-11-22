@@ -5,8 +5,8 @@
  * Description: Convert your WordPress website into a Progressive Web App
  * Author: SuperPWA
  * Author URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri
- * Contributors: Arun Basil Lal, Jose Varghese
- * Version: 1.9
+ * Contributors: Arun Basil Lal, Jose Varghese, Mat Lipe
+ * Version: 1.9.1
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -23,7 +23,7 @@
  * /admin/						- Plugin backend.
  * /functions/					- Functions and utilites.
  * /includes/					- External third party classes and libraries.
- * /languages/					- Translation files go here. 
+ * /languages/					- Translation files go here.
  * /public/ 					- Front end files go here.
  * index.php					- Dummy file.
  * license.txt					- GPL v2
@@ -31,7 +31,7 @@
  * superpwa.php					- Main plugin file.
  * README.MD					- Readme for GitHub.
  * readme.txt					- Readme for WordPress plugin repository.
- * uninstall.php				- Fired when the plugin is uninstalled. 
+ * uninstall.php				- Fired when the plugin is uninstalled.
  */
 
 // Exit if accessed directly
