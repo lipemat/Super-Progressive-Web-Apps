@@ -99,13 +99,27 @@ function superpwa_sw_template() {
  * @since 1.0
  */
 function superpwa_register_sw() {
-
+    $settings = superpwa_get_settings();
 	wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), superpwa_get_resources_version(), true );
-	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', array(
-			'url' => superpwa_sw( 'src' ),
+	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', apply_filters( 'superpwa_js_config',
+		array(
+			'url'           => superpwa_sw( 'src' ),
+			'addToHomeText' => '<span class="dashicons dashicons-plus"></span> <span>' . __( 'Add To Home Screen', 'super-progressive-web-apps' ) . '</span> <span class="dashicons dashicons-no-alt dismiss"></span>',
+			'addToHomeColor' => $settings['theme_color'],
 		)
-	);
+	));
+
+	if( $settings['add_to_home'] ) {
+		wp_enqueue_script( 'superpwa-add-to-home-screen', SUPERPWA_PATH_SRC . 'public/js/add-to-home-screen.js', [
+			'jquery',
+			'superpwa-register-sw'
+		], superpwa_get_resources_version(), true );
+		wp_enqueue_script( 'dashicons' );
+		wp_add_inline_style( 'dashicons', superpwa_locate_template( 'add-to-home-screen.css' ) );
+	}
+
 }
+
 add_action( 'wp_enqueue_scripts', 'superpwa_register_sw' );
 
 /**

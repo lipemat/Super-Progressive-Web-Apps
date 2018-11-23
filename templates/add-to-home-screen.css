@@ -1,0 +1,27 @@
+#superpwa-add-to-home {
+	width: 100%;
+	padding: 15px 30px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999999999;
+	cursor: pointer;
+	text-align: center;
+	text-transform: uppercase;
+	color: white;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px black;
+}
+
+#superpwa-add-to-home span:hover{
+	opacity: 0.8;
+}
+
+#superpwa-add-to-home .dashicons {
+	position: relative;
+	vertical-align: middle;
+}
+
+#superpwa-add-to-home .dashicons-no-alt {
+	float: right;
+}

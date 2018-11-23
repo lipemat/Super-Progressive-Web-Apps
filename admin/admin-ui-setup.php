@@ -102,6 +102,15 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
 
+	// Add To Home Prompt
+	add_settings_field(
+		'superpwa_add_to_home',									// ID
+		__('Prompt To Add To Home', 'super-progressive-web-apps'),	// Title
+		'superpwa_add_to_home_cb',								// Callback function
+		'superpwa_basic_settings_section',						// Page slug
+		'superpwa_basic_settings_section'						// Settings Section ID
+	);
+
 		// Splash Screen Background Color
 		add_settings_field(
 			'superpwa_background_color',							// ID
@@ -224,24 +233,22 @@ function superpwa_validater_and_sanitizer( $settings ) {
  * @return	Array	A merged array of default and settings saved in database.
  */
 function superpwa_get_settings() {
-
 	$defaults = array(
-				'app_name'			=> get_bloginfo( 'name' ),
-				'app_short_name'	=> get_bloginfo( 'name' ),
-				'description'		=> get_bloginfo( 'description' ),
-				'icon'				=> SUPERPWA_PATH_SRC . 'public/images/logo.png',
-				'splash_icon'		=> SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
-				'background_color' 	=> '#D5E0EB',
-				'theme_color' 		=> '#D5E0EB',
-				'start_url' 		=> 0,
-				'start_url_amp'		=> 0,
-				'offline_page' 		=> 0,
-				'orientation'		=> 1,
-			);
+		'add_to_home'      => 0,
+		'app_name'         => get_bloginfo( 'name' ),
+		'app_short_name'   => get_bloginfo( 'name' ),
+		'description'      => get_bloginfo( 'description' ),
+		'icon'             => SUPERPWA_PATH_SRC . 'public/images/logo.png',
+		'splash_icon'      => SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
+		'background_color' => '#D5E0EB',
+		'theme_color'      => '#D5E0EB',
+		'start_url'        => 0,
+		'start_url_amp'    => 0,
+		'offline_page'     => 0,
+		'orientation'      => 1,
+	);
 
-	$settings = get_option( 'superpwa_settings', $defaults );
-
-	return $settings;
+	return wp_parse_args( get_option( 'superpwa_settings' ), $defaults );
 }
 
 /**
