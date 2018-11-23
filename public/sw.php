@@ -114,7 +114,7 @@ function superpwa_register_sw() {
 			'jquery',
 			'superpwa-register-sw'
 		], superpwa_get_resources_version(), true );
-		wp_enqueue_script( 'dashicons' );
+		wp_enqueue_style( 'dashicons' );
 		wp_add_inline_style( 'dashicons', superpwa_locate_template( 'add-to-home-screen.css' ) );
 	}
 

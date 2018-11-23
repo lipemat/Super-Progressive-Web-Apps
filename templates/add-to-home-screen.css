@@ -2,7 +2,7 @@
 	width: 100%;
 	padding: 15px 30px;
 	position: fixed;
-	top: 0;
+	bottom: 0;
 	left: 0;
 	z-index: 999999999;
 	cursor: pointer;
@@ -11,6 +11,7 @@
 	color: white;
 	font-weight: bold;
 	text-shadow: 1px 1px 1px black;
+	border-top: 1px inset white;
 }
 
 #superpwa-add-to-home span:hover{

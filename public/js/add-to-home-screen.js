@@ -29,7 +29,17 @@
 		localStorage.setItem('superpwaAddToHomeDismissed', '1');
 	};
 
+	/**
+	 * Fires when all criteria is available to install the app
+	 *
+	 * @link https://developers.google.com/web/fundamentals/app-install-banners/
+	 */
 	window.addEventListener('beforeinstallprompt', function (deferredPrompt) {
+		//only display on web (mobile has their own)
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			return;
+		}
+
 		deferredPrompt.preventDefault();
 		var dismissed = localStorage.getItem('superpwaAddToHomeDismissed');
 		if (null === dismissed) {
