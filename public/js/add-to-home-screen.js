@@ -2,8 +2,9 @@
 
 
 	var setupPrompt = function (deferredPrompt) {
-		var el = $('<div id="superpwa-add-to-home" style="background:' + config.addToHomeColor + '">' + config.addToHomeText + '</div>');
+		var el = $('<div id="superpwa-add-to-home" style="background:' + config.addToHomeColor + '; display:none">' + config.addToHomeText + '</div>');
 		$('body').prepend(el);
+		$(el).slideDown();
 
 		el.on('click', 'span', function (e) {
 			el.remove();
