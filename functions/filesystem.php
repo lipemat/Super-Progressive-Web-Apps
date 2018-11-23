@@ -14,6 +14,22 @@
 if ( ! defined('ABSPATH') ) exit;
 
 /**
+ * Get the version of resources like JS file so browser cache
+ * will bust on a new version of this plugin.
+ *
+ * @since 1.9.2
+ *
+ * @return null|string
+ */
+function superpwa_get_resources_version() {
+	if ( class_exists( '\Lipe\Lib\Theme\Styles' ) ) {
+		return \Lipe\Lib\Theme\Styles::in()->get_version();
+	}
+
+	return SUPERPWA_VERSION;
+}
+
+/**
  * Initialize the WP filesystem
  *
  * @since 1.0

@@ -14,8 +14,8 @@
  */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit; 
- 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * Add admin menu pages
  *
@@ -23,13 +23,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @refer	https://developer.wordpress.org/plugins/administration-menus/
  */
 function superpwa_add_menu_links() {
-	
+
 	// Main menu page
 	add_menu_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render', SUPERPWA_PATH_SRC. 'admin/img/superpwa-menu-icon.png', 100 );
-	
+
 	// Settings page - Same as main menu page
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Settings', 'super-progressive-web-apps' ), 'manage_options', 'superpwa', 'superpwa_admin_interface_render' );
-	
+
 	// Add-Ons page
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Add-Ons', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-addons', 'superpwa_addons_interface_render' );
 }
@@ -43,12 +43,12 @@ add_action( 'admin_menu', 'superpwa_add_menu_links' );
 function superpwa_register_settings() {
 
 	// Register Setting
-	register_setting( 
+	register_setting(
 		'superpwa_settings_group', 			// Group name
 		'superpwa_settings', 				// Setting name = html form <input> name on settings form
 		'superpwa_validater_and_sanitizer'	// Input sanitizer
 	);
-	
+
 	// Basic Application Settings
     add_settings_section(
         'superpwa_basic_settings_section',					// ID
@@ -56,7 +56,7 @@ function superpwa_register_settings() {
         '__return_false',									// Callback Function
         'superpwa_basic_settings_section'					// Page slug
     );
-	
+
 		// Application Name
 		add_settings_field(
 			'superpwa_app_name',									// ID
@@ -65,7 +65,7 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+
 		// Application Short Name
 		add_settings_field(
 			'superpwa_app_short_name',								// ID
@@ -74,7 +74,7 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+
 		// Description
 		add_settings_field(
 			'superpwa_description',									// ID
@@ -83,7 +83,7 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+
 		// Application Icon
 		add_settings_field(
 			'superpwa_icons',										// ID
@@ -92,7 +92,7 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+
 		// Splash Screen Icon
 		add_settings_field(
 			'superpwa_splash_icon',									// ID
@@ -101,7 +101,7 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+
 		// Splash Screen Background Color
 		add_settings_field(
 			'superpwa_background_color',							// ID
@@ -110,7 +110,7 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+
 		// Theme Color
 		add_settings_field(
 			'superpwa_theme_color',									// ID
@@ -119,7 +119,7 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+
 		// Start URL
 		add_settings_field(
 			'superpwa_start_url',									// ID
@@ -128,7 +128,7 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+
 		// Offline Page
 		add_settings_field(
 			'superpwa_offline_page',								// ID
@@ -137,7 +137,7 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+
 		// Orientation
 		add_settings_field(
 			'superpwa_orientation',									// ID
@@ -146,7 +146,7 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section',						// Page slug
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
-		
+
 	// PWA Status
     add_settings_section(
         'superpwa_pwa_status_section',					// ID
@@ -154,7 +154,7 @@ function superpwa_register_settings() {
         '__return_false',								// Callback Function
         'superpwa_pwa_status_section'					// Page slug
     );
-	
+
 		// Manifest status
 		add_settings_field(
 			'superpwa_manifest_status',								// ID
@@ -163,7 +163,7 @@ function superpwa_register_settings() {
 			'superpwa_pwa_status_section',							// Page slug
 			'superpwa_pwa_status_section'							// Settings Section ID
 		);
-		
+
 		// Service Worker status
 		add_settings_field(
 			'superpwa_sw_status',									// ID
@@ -171,8 +171,8 @@ function superpwa_register_settings() {
 			'superpwa_sw_status_cb',								// CB
 			'superpwa_pwa_status_section',							// Page slug
 			'superpwa_pwa_status_section'							// Settings Section ID
-		);	
-		
+		);
+
 		// HTTPS status
 		add_settings_field(
 			'superpwa_https_status',								// ID
@@ -180,48 +180,48 @@ function superpwa_register_settings() {
 			'superpwa_https_status_cb',								// CB
 			'superpwa_pwa_status_section',							// Page slug
 			'superpwa_pwa_status_section'							// Settings Section ID
-		);	
+		);
 }
 add_action( 'admin_init', 'superpwa_register_settings' );
 
 /**
  * Validate and sanitize user input before its saved to database
  *
- * @since 1.0 
+ * @since 1.0
  * @since 1.3 Added splash_icon
  * @since 1.6 Added description
  */
 function superpwa_validater_and_sanitizer( $settings ) {
-	
+
 	// Sanitize Application Name
 	$settings['app_name'] = sanitize_text_field( $settings['app_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_name'] );
-	
+
 	// Sanitize Application Short Name
 	$settings['app_short_name'] = sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] );
-	
+
 	// Sanitize description
 	$settings['description'] = sanitize_text_field( $settings['description'] );
-	
+
 	// Sanitize hex color input for background_color
 	$settings['background_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['background_color'] ) ? sanitize_text_field( $settings['background_color'] ) : '#D5E0EB';
-	
+
 	// Sanitize hex color input for theme_color
 	$settings['theme_color'] = preg_match( '/#([a-f0-9]{3}){1,2}\b/i', $settings['theme_color'] ) ? sanitize_text_field( $settings['theme_color'] ) : '#D5E0EB';
-	
+
 	// Sanitize application icon
 	$settings['icon'] = sanitize_text_field( $settings['icon'] ) == '' ? superpwa_httpsify( SUPERPWA_PATH_SRC . 'public/images/logo.png' ) : sanitize_text_field( superpwa_httpsify( $settings['icon'] ) );
-	
+
 	// Sanitize splash screen icon
 	$settings['splash_icon'] = sanitize_text_field( superpwa_httpsify( $settings['splash_icon'] ) );
-	
+
 	return $settings;
 }
-			
+
 /**
  * Get settings from database
  *
  * @since 	1.0
- * @return	Array	A merged array of default and settings saved in database. 
+ * @return	Array	A merged array of default and settings saved in database.
  */
 function superpwa_get_settings() {
 
@@ -240,7 +240,7 @@ function superpwa_get_settings() {
 			);
 
 	$settings = get_option( 'superpwa_settings', $defaults );
-	
+
 	return $settings;
 }
 
@@ -250,21 +250,21 @@ function superpwa_get_settings() {
  * @since	1.0
  */
 function superpwa_enqueue_css_js( $hook ) {
-	
+
     // Load only on SuperPWA plugin pages
 	if ( strpos( $hook, 'superpwa' ) === false ) {
 		return;
 	}
-	
+
 	// Color picker CSS
 	// @refer https://make.wordpress.org/core/2012/11/30/new-color-picker-in-wp-3-5/
     wp_enqueue_style( 'wp-color-picker' );
-	
+
 	// Everything needed for media upload
 	wp_enqueue_media();
-	
+
 	// Main JS
-    wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), SUPERPWA_VERSION, true );
+    wp_enqueue_script( 'superpwa-main-js', SUPERPWA_PATH_SRC . 'admin/js/main.js', array( 'wp-color-picker' ), superpwa_get_resources_version(), true );
 }
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
 
@@ -277,10 +277,10 @@ add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
  * @since	1.0
  */
 function superpwa_after_save_settings_todo() {
-	
+
 	// Regenerate manifest
 	superpwa_generate_manifest();
-	
+
 	// Regenerate service worker
 	superpwa_generate_sw();
 }
@@ -295,18 +295,18 @@ add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_tod
  * @refer	https://codex.wordpress.org/Function_Reference/get_current_screen
  */
 function superpwa_footer_text( $default ) {
-    
+
 	// Retun default on non-plugin pages
 	$screen = get_current_screen();
 	if ( strpos( $screen->id, 'superpwa' ) === false ) {
 		return $default;
 	}
-	
-    $superpwa_footer_text = sprintf( __( 'If you like SuperPWA, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ), 
+
+    $superpwa_footer_text = sprintf( __( 'If you like SuperPWA, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ),
 	'https://millionclues.com/donate/',
 	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post'
 	);
-	
+
 	return $superpwa_footer_text;
 }
 add_filter( 'admin_footer_text', 'superpwa_footer_text' );
@@ -317,13 +317,13 @@ add_filter( 'admin_footer_text', 'superpwa_footer_text' );
  * @since	1.0
  */
 function superpwa_footer_version( $default ) {
-	
+
 	// Retun default on non-plugin pages
 	$screen = get_current_screen();
 	if ( strpos( $screen->id, 'superpwa' ) === false ) {
 		return $default;
 	}
-	
+
 	return 'SuperPWA ' . SUPERPWA_VERSION;
 }
 add_filter( 'update_footer', 'superpwa_footer_version', 11 );

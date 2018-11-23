@@ -106,7 +106,7 @@ function superpwa_sw_template() {
  */
 function superpwa_register_sw() {
 
-	wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), null, true );
+	wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), superpwa_get_resources_version(), true );
 	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', array(
 			'url' => superpwa_sw( 'src' ),
 		)
