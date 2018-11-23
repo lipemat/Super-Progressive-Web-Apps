@@ -30,6 +30,31 @@ function superpwa_get_resources_version() {
 }
 
 /**
+ * Get a template from either the theme or this plugin
+ *
+ * @param      $template
+ * @param bool $get_contents
+ *
+ * @since 1.9.2
+ *
+ * @return string
+ */
+function superpwa_locate_template( $template, $get_contents = true ) {
+	$located = locate_template( 'super-progressive-web-apps/' . $template, true );
+	if ( empty( $located ) ) {
+		$located = SUPERPWA_PATH_ABS . 'templates/' . $template;
+	}
+	if ( $get_contents ) {
+		ob_start();
+		require $located;
+		return ob_get_clean();
+	}
+
+	return $located;
+}
+
+
+/**
  * Initialize the WP filesystem
  *
  * @since 1.0

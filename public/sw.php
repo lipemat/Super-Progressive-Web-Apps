@@ -88,13 +88,7 @@ function superpwa_generate_sw() {
  * @return string - Contents to be written to superpwa-sw.js
  */
 function superpwa_sw_template() {
-	ob_start();
-	$template = locate_template( 'super-progressive-web-apps/sw.php', true );
-	if ( empty( $template ) ) {
-		require SUPERPWA_PATH_ABS . 'templates/sw.php';
-	}
-
-	return apply_filters( 'superpwa_sw_template', ob_get_clean() );
+	return apply_filters( 'superpwa_sw_template', superpwa_locate_template( 'sw.php' ) );
 }
 
 /**
