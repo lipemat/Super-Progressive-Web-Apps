@@ -20,7 +20,14 @@ self.addEventListener('install', function(e) {
 	e.waitUntil(
 		caches.open(cacheName).then(function(cache) {
 			console.log('PWA service worker caching dependencies');
+			var _cached = [];
 			filesToCache.map(function(url) {
+				//to prevent doubling up
+				if ( _cached.indexOf(url) !== -1 ){
+					return;
+				}
+				_cached.push(url);
+
 				return cache.add(url).catch(function (reason) {
 					return console.log('PWA: ' + String(reason) + ' ' + url);
 				});
