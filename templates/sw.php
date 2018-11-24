@@ -4,11 +4,6 @@ $settings = superpwa_get_settings();
 <script>
 'use strict';
 
-/**
- * Service Worker of SuperPWA
- * To learn more and add one to your website, visit - https://superpwa.com
- */
-
 const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
 const startPage = '<?php echo superpwa_get_start_url(); ?>';
 const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
@@ -18,13 +13,23 @@ const allowedOrigins = [<?php echo apply_filters( 'superpwa_sw_allowed_domain_pa
 
 // Install
 self.addEventListener('install', function(e) {
-	console.log('SuperPWA service worker installation');
+	//we are not going to wait
+	self.skipWaiting();
+
+	console.log('PWA service worker installation');
 	e.waitUntil(
 		caches.open(cacheName).then(function(cache) {
-			console.log('SuperPWA service worker caching dependencies');
+			console.log('PWA service worker caching dependencies');
+			var _cached = [];
 			filesToCache.map(function(url) {
+				//to prevent doubling up
+				if ( _cached.indexOf(url) !== -1 ){
+					return;
+				}
+				_cached.push(url);
+
 				return cache.add(url).catch(function (reason) {
-					return console.log('SuperPWA: ' + String(reason) + ' ' + url);
+					return console.log('PWA: ' + String(reason) + ' ' + url);
 				});
 			});
 		})
@@ -33,12 +38,12 @@ self.addEventListener('install', function(e) {
 
 // Activate
 self.addEventListener('activate', function(e) {
-	console.log('SuperPWA service worker activation');
+	console.log('PWA service worker activation');
 	e.waitUntil(
 		caches.keys().then(function(keyList) {
 			return Promise.all(keyList.map(function(key) {
 				if ( key !== cacheName ) {
-					console.log('SuperPWA old cache removed', key);
+					console.log('PWA old cache removed', key);
 					return caches.delete(key);
 				}
 			}));
@@ -50,14 +55,14 @@ self.addEventListener('activate', function(e) {
 // Fetch
 self.addEventListener('fetch', function(e) {
 	// Return if the current request url is in the never cache list
-	if ( ! neverCacheUrls.every(testAgainstURL, e.request.url) ) {
+	if ( isURLInPatterns(neverCacheUrls, e.request.url) ) {
 		console.log( "Current request %s is excluded from cache.", e.request.url );
 		return;
 	}
 
 	// Return if request url is from an external domain not on allowed list.
 	var $origin = new URL(e.request.url).origin;
-	if ($origin !== location.origin && allowedOrigins.every(testAgainstURL, $origin)) {
+	if ($origin !== location.origin && ! isURLInPatterns(allowedOrigins, $origin)) {
 		return;
 	}
 
@@ -123,13 +128,17 @@ self.addEventListener('fetch', function(e) {
 });
 
 /**
- * Test a regular expression object against a url
+ * See if a url matches any items in an array of regular expression.
  *
- * @param url
+ * @param {string} url
+ * @param {array} patterns
  * @returns {boolean}
  */
-function testAgainstURL(url) {
-	return !this.match(url);
+function isURLInPatterns(patterns, url) {
+	return patterns.some( function(pattern) {
+		var regex = new RegExp( pattern );
+		return regex.test(url);
+	} );
 }
 
 

@@ -18,6 +18,8 @@ require __DIR__ . '/vendor/autoload.php'
 2. Override templates via a theme directory.
 3. Add to home screen optional support. 
 4. Support Google Webfonts and Gravatars. Also now filter to whitelist additional cache domains `superpwa_sw_allowed_domain_patterns`
+5. Skip waiting on new service-working install.
+6. Prevent doubling up of requests on initial cache.
 
 -------------------------
 
