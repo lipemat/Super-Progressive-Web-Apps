@@ -17,6 +17,8 @@ require __DIR__ . '/vendor/autoload.php'
 1. Support WP as a sub directory via filter `superpwa_output_path`.
 2. Override templates via a theme directory.
 3. Add to home screen optional support. 
+4. Skip waiting on new service-working install.
+5. Prevent doubling up of requests on initial cache.
 
 -------------------------
 
