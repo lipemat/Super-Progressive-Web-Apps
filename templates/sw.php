@@ -14,7 +14,7 @@ const startPage = '<?php echo superpwa_get_start_url(); ?>';
 const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
 const filesToCache = [<?php echo apply_filters( 'superpwa_sw_files_to_cache', 'startPage, offlinePage' ); ?>];
 const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ); ?>];
-const allowedOrigins = <?php echo json_encode( apply_filters( 'superpwa_sw_allowed_domain_patterns', ['https://fonts.googleapis.com','https://fonts.gstatic.com']) ); ?>;
+const allowedOrigins = [<?php echo apply_filters( 'superpwa_sw_allowed_domain_patterns', '/https?:\/\/fonts.+/'); ?>];
 
 // Install
 self.addEventListener('install', function(e) {
@@ -50,18 +50,14 @@ self.addEventListener('activate', function(e) {
 // Fetch
 self.addEventListener('fetch', function(e) {
 	// Return if the current request url is in the never cache list
-	if ( ! neverCacheUrls.every(checkNeverCacheList, e.request.url) ) {
+	if ( ! neverCacheUrls.every(testAgainstURL, e.request.url) ) {
 		console.log( "Current request %s is excluded from cache.", e.request.url );
 		return;
 	}
 
 	// Return if request url is from an external domain not on allowed list.
 	var $origin = new URL(e.request.url).origin;
-	if ($origin !== location.origin && !allowedOrigins.some(
-		function ($domain) {
-			return $origin === $domain;
-		})
-	) {
+	if ($origin !== location.origin && !allowedOrigins.every(testAgainstURL, $origin)) {
 		return;
 	}
 
@@ -126,12 +122,14 @@ self.addEventListener('fetch', function(e) {
 	);
 });
 
-// Check if current url is in the neverCacheUrls list
-function checkNeverCacheList(url) {
-	if ( this.match(url) ) {
-		return false;
-	}
-	return true;
+/**
+ * Test a regular expression object against a url
+ *
+ * @param url
+ * @returns {boolean}
+ */
+function testAgainstURL(url) {
+	return !this.match(url);
 }
 
 </script>
