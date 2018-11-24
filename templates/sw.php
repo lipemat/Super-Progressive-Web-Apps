@@ -50,14 +50,14 @@ self.addEventListener('activate', function(e) {
 // Fetch
 self.addEventListener('fetch', function(e) {
 	// Return if the current request url is in the never cache list
-	if ( ! neverCacheUrls.every(testAgainstURL, e.request.url) ) {
+	if ( isURLInPatterns(neverCacheUrls, e.request.url) ) {
 		console.log( "Current request %s is excluded from cache.", e.request.url );
 		return;
 	}
 
 	// Return if request url is from an external domain not on allowed list.
 	var $origin = new URL(e.request.url).origin;
-	if ($origin !== location.origin && allowedOrigins.every(testAgainstURL, $origin)) {
+	if ($origin !== location.origin && ! isURLInPatterns(allowedOrigins, $origin)) {
 		return;
 	}
 
@@ -123,13 +123,17 @@ self.addEventListener('fetch', function(e) {
 });
 
 /**
- * Test a regular expression object against a url
+ * See if a url matches any items in an array of regular expression.
  *
- * @param url
+ * @param {string} url
+ * @param {array} patterns
  * @returns {boolean}
  */
-function testAgainstURL(url) {
-	return !this.match(url);
+function isURLInPatterns(patterns, url) {
+	return patterns.some( function(pattern) {
+		var regex = new RegExp( pattern );
+		return regex.test(url);
+	} );
 }
 
 
