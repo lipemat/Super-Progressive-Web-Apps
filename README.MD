@@ -17,6 +17,7 @@ require __DIR__ . '/vendor/autoload.php'
 1. Support WP as a sub directory via filter `superpwa_output_path`.
 2. Override templates via a theme directory.
 3. Add to home screen optional support. 
+4. Support Google Webfonts and Gravatars. Also now filter to whitelist additional cache domains `superpwa_sw_allowed_domain_patterns`
 
 -------------------------
 
