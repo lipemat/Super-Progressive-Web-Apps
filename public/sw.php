@@ -67,8 +67,8 @@ function superpwa_generate_sw() {
 	// Get Settings
 	$settings = superpwa_get_settings();
 
-	// Get the service worker tempalte
-	$sw = superpwa_sw_template();
+	// Get the service worker template
+	$sw = strip_tags( superpwa_sw_template() );
 
 	// Delete service worker if it exists
 	superpwa_delete_sw();

@@ -1,7 +1,7 @@
 <?php
 $settings = superpwa_get_settings();
 ?>
-
+<script>
 'use strict';
 
 /**
@@ -131,3 +131,5 @@ function checkNeverCacheList(url) {
 	}
 	return true;
 }
+
+</script>
