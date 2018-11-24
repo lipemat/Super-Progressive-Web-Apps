@@ -4,11 +4,6 @@ $settings = superpwa_get_settings();
 <script>
 'use strict';
 
-/**
- * Service Worker of SuperPWA
- * To learn more and add one to your website, visit - https://superpwa.com
- */
-
 const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
 const startPage = '<?php echo superpwa_get_start_url(); ?>';
 const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
@@ -18,13 +13,16 @@ const allowedOrigins = [<?php echo apply_filters( 'superpwa_sw_allowed_domain_pa
 
 // Install
 self.addEventListener('install', function(e) {
-	console.log('SuperPWA service worker installation');
+	//we are not going to wait
+	self.skipWaiting();
+
+	console.log('PWA service worker installation');
 	e.waitUntil(
 		caches.open(cacheName).then(function(cache) {
-			console.log('SuperPWA service worker caching dependencies');
+			console.log('PWA service worker caching dependencies');
 			filesToCache.map(function(url) {
 				return cache.add(url).catch(function (reason) {
-					return console.log('SuperPWA: ' + String(reason) + ' ' + url);
+					return console.log('PWA: ' + String(reason) + ' ' + url);
 				});
 			});
 		})
@@ -33,12 +31,12 @@ self.addEventListener('install', function(e) {
 
 // Activate
 self.addEventListener('activate', function(e) {
-	console.log('SuperPWA service worker activation');
+	console.log('PWA service worker activation');
 	e.waitUntil(
 		caches.keys().then(function(keyList) {
 			return Promise.all(keyList.map(function(key) {
 				if ( key !== cacheName ) {
-					console.log('SuperPWA old cache removed', key);
+					console.log('PWA old cache removed', key);
 					return caches.delete(key);
 				}
 			}));
