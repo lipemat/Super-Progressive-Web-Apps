@@ -39,7 +39,7 @@
 			if (null === scrollTimeout) {
 				scrollTimeout = setTimeout(function () {
 					var position = ($(document).height() - $(this).height() - $(this).scrollTop());
-					if (position <= 0) {
+					if (position <= 50) {
 						el.slideUp();
 					}
 					scrollTimeout = null;
