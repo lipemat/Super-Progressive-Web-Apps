@@ -26,6 +26,9 @@ require_once( SUPERPWA_PATH_ABS . 'functions/multisite.php' );
 require_once( SUPERPWA_PATH_ABS . 'public/manifest.php' );
 require_once( SUPERPWA_PATH_ABS . 'public/sw.php' );
 
+// WP CLI
+require SUPERPWA_PATH_ABS . 'wp-cli/commands.php';
+
 // Load bundled add-ons
 if ( superpwa_addons_status( 'utm_tracking' ) 		== 'active' ) require_once( SUPERPWA_PATH_ABS . 'addons/utm-tracking.php' );
 if ( superpwa_addons_status( 'apple_touch_icons' ) 	== 'active' ) require_once( SUPERPWA_PATH_ABS . 'addons/apple-touch-icons.php' );
