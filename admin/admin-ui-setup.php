@@ -57,6 +57,15 @@ function superpwa_register_settings() {
         'superpwa_basic_settings_section'					// Page slug
     );
 
+	// Add To Home Prompt
+	add_settings_field(
+		'superpwa_enabled',									// ID
+		__('Enable Service Worker', 'super-progressive-web-apps'),	// Title
+		'superpwa_enabled_cb',								// Callback function
+		'superpwa_basic_settings_section',						// Page slug
+		'superpwa_basic_settings_section'						// Settings Section ID
+	);
+
 		// Application Name
 		add_settings_field(
 			'superpwa_app_name',									// ID
@@ -230,7 +239,7 @@ function superpwa_validater_and_sanitizer( $settings ) {
  * Get settings from database
  *
  * @since 	1.0
- * @return	Array	A merged array of default and settings saved in database.
+ * @return	array	A merged array of default and settings saved in database.
  */
 function superpwa_get_settings() {
 	$defaults = array(
@@ -238,6 +247,7 @@ function superpwa_get_settings() {
 		'app_name'         => get_bloginfo( 'name' ),
 		'app_short_name'   => get_bloginfo( 'name' ),
 		'description'      => get_bloginfo( 'description' ),
+		'enabled'          => 0,
 		'icon'             => SUPERPWA_PATH_SRC . 'public/images/logo.png',
 		'splash_icon'      => SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
 		'background_color' => '#D5E0EB',
@@ -284,12 +294,16 @@ add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
  * @since	1.0
  */
 function superpwa_after_save_settings_todo() {
-
+	$settings = superpwa_get_settings();
 	// Regenerate manifest
 	superpwa_generate_manifest();
 
-	// Regenerate service worker
-	superpwa_generate_sw();
+	if ( $settings['enabled'] ) {
+		// Regenerate service worker
+		superpwa_generate_sw();
+	} else {
+		superpwa_delete_sw();
+	}
 }
 add_action( 'add_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
 add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_todo' );

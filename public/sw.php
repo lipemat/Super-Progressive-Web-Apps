@@ -99,20 +99,23 @@ function superpwa_sw_template() {
  * @since 1.0
  */
 function superpwa_register_sw() {
-    $settings = superpwa_get_settings();
-	wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', array(), superpwa_get_resources_version(), true );
-	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', apply_filters( 'superpwa_js_config',
-		array(
-			'url'           => superpwa_sw( 'src' ),
-			'addToHomeText' => '<span class="dashicons dashicons-plus"></span> <span>' . __( 'Add To Home Screen', 'super-progressive-web-apps' ) . '</span> <span class="dashicons dashicons-no-alt dismiss"></span>',
-			'addToHomeColor' => $settings['theme_color'],
-		)
-	));
+	$settings = superpwa_get_settings();
+	if ( superpwa_is_enabled() ) {
+		wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/register-sw.js', [], superpwa_get_resources_version(), true );
+	} else {
+		wp_enqueue_script( 'superpwa-register-sw', SUPERPWA_PATH_SRC . 'public/js/unregister-sw.js', [], superpwa_get_resources_version(), true );
 
-	if( $settings['add_to_home'] ) {
+	}
+	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', apply_filters( 'superpwa_js_config', [
+		'url'            => superpwa_sw( 'src' ),
+		'addToHomeText'  => '<span class="dashicons dashicons-plus"></span> <span>' . __( 'Add To Home Screen', 'super-progressive-web-apps' ) . '</span> <span class="dashicons dashicons-no-alt dismiss"></span>',
+		'addToHomeColor' => $settings['theme_color'],
+	] ) );
+
+	if ( superpwa_is_enabled() && $settings['add_to_home'] ) {
 		wp_enqueue_script( 'superpwa-add-to-home-screen', SUPERPWA_PATH_SRC . 'public/js/add-to-home-screen.js', [
 			'jquery',
-			'superpwa-register-sw'
+			'superpwa-register-sw',
 		], superpwa_get_resources_version(), true );
 		wp_enqueue_style( 'dashicons' );
 		wp_add_inline_style( 'dashicons', superpwa_locate_template( 'add-to-home-screen.css' ) );

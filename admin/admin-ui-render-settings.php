@@ -39,10 +39,29 @@ function superpwa_add_to_home_cb() {
 		<input type="checkbox" name="superpwa_settings[add_to_home]" value="1" <?php checked( $settings['add_to_home'] ); ?>/>
 
 		<p class="description">
-			<?php _e('Will prompt viewers to install to their home screen.', 'super-progressive-web-apps'); ?>
+			<?php _e('Will prompt viewers to install to their home screen. Only works if the service worker is enabled above.', 'super-progressive-web-apps'); ?>
 		</p>
 	</fieldset>
 
+	<?php
+}
+
+/**
+ * Add To Home checkbox
+ *
+ * @since 1.9.6
+ *
+ * @return void
+ */
+function superpwa_enabled_cb() {
+	$settings = superpwa_get_settings();
+	?>
+	<fieldset>
+		<input type="checkbox" name="superpwa_settings[enabled]" value="1" <?php checked( $settings['enabled'] ); ?>/>
+		<p class="description">
+			<?php _e('Enable the service worker.'); ?>
+		</p>
+	</fieldset>
 	<?php
 }
 
@@ -351,6 +370,11 @@ function superpwa_manifest_status_cb() {
  * @since 1.8 Attempt to generate service worker again if it doesn't exist.
  */
 function superpwa_sw_status_cb() {
+	$settings = superpwa_get_settings();
+	if ( ! $settings['enabled'] ){
+		printf( '<p><span class="dashicons dashicons-no-alt" style="color: #dc3232;"></span> ' . __( 'Service worker not generated because it is disabled in these settings.', 'super-progressive-web-apps' ) . '</p>' );
+		return;
+	}
 
 	// See superpwa_manifest_status_cb() for documentation.
 	if ( superpwa_get_contents( superpwa_sw( 'abs' ) ) || superpwa_generate_sw() ) {
