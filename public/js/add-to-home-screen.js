@@ -1,11 +1,18 @@
 (function (config, $) {
-
-
+	/**
+	 * Add the "Add To Home" prompt to the screen
+	 * and handle the event when clicked on
+	 *
+	 * @param {event} deferredPrompt
+	 */
 	var setupPrompt = function (deferredPrompt) {
 		var el = $('<div id="superpwa-add-to-home" style="background:' + config.addToHomeColor + '; display:none">' + config.addToHomeText + '</div>');
 		$('body').prepend(el);
 		$(el).slideDown();
 
+		/**
+		 * Trigger the prompt on click
+		 */
 		el.on('click', 'span', function (e) {
 			el.remove();
 
@@ -24,6 +31,23 @@
 				});
 		});
 
+		/**
+		 * Hide the element on scroll to bottom of screen
+		 */
+		var scrollTimeout = null;
+		$(window).on('scroll', function () {
+			if (null === scrollTimeout) {
+				scrollTimeout = setTimeout(function () {
+					var position = ($(document).height() - $(this).height() - $(this).scrollTop());
+					console.info( position );
+					if (position <= 0) {
+						el.slideUp();
+					}
+					scrollTimeout = null;
+				}, 500);
+			}
+		});
+
 	};
 
 	var dismiss = function () {
@@ -37,7 +61,7 @@
 	 */
 	window.addEventListener('beforeinstallprompt', function (deferredPrompt) {
 		//only display on web (mobile has their own)
-		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 			return;
 		}
 
