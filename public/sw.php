@@ -108,6 +108,7 @@ function superpwa_register_sw() {
 	}
 	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', apply_filters( 'superpwa_js_config', [
 		'url'            => superpwa_sw( 'src' ),
+		'enabled'        => $settings['enabled'],
 		'addToHomeText'  => '<span class="dashicons dashicons-plus"></span> <span>' . __( 'Add To Home Screen', 'super-progressive-web-apps' ) . '</span> <span class="dashicons dashicons-no-alt dismiss"></span>',
 		'addToHomeColor' => $settings['theme_color'],
 	] ) );

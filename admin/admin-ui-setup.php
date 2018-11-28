@@ -306,7 +306,11 @@ function superpwa_after_save_settings_todo() {
 	}
 }
 add_action( 'add_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
-add_action( 'update_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
+//use the pre_update because we want this to run any time we hit save, not just when options update
+add_action( 'pre_update_option_superpwa_settings', function( $value ){
+	superpwa_after_save_settings_todo();
+	return $value;
+});
 
 /**
  * Admin footer text

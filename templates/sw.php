@@ -52,6 +52,10 @@ self.addEventListener('activate', function(e) {
 	return self.clients.claim();
 });
 
+<?php
+if ( ! defined( 'SCRIPT_DEBUG' ) || SCRIPT_DEBUG === false ) {
+	?>
+
 // Fetch
 self.addEventListener('fetch', function(e) {
 	// Return if the current request url is in the never cache list
@@ -126,6 +130,26 @@ self.addEventListener('fetch', function(e) {
 		})
 	);
 });
+
+<?php
+} else {
+	?>
+var consoleLogTimeout = null;
+// Fetch
+self.addEventListener('fetch', function (e) {
+	//do nothing for fetch except post a message to console log se we know we have not cache
+	if (null === consoleLogTimeout) {
+		consoleLogTimeout = setTimeout(function () {
+			console.log('Fetching from cache is disabled because SCRIPT_DEBUG is true. To enable caching, set SCRIPT_DEBUG = false then regenerate the service-worker via `wp superpwa regenerate` or re-saving the settings.');
+			consoleLogTimeout = null;
+		}, 1000);
+	}
+});
+
+	<?php
+
+}
+?>
 
 /**
  * See if a url matches any items in an array of regular expression.
