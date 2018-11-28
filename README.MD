@@ -19,6 +19,9 @@ require __DIR__ . '/vendor/autoload.php'
 3. Add to home screen optional support. 
 4. Skip waiting on new service-working install.
 5. Prevent doubling up of requests on initial cache.
+6. Setting to enable/disable the service worker.
+7. Add `wp-cli superpwa regenerate` command for generating service-worker file.
+8. Automatically disable fetch when `SCRIPT_DEBUG = true` to prevent cache when developing.
 
 -------------------------
 
