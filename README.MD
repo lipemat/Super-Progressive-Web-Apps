@@ -17,11 +17,12 @@ require __DIR__ . '/vendor/autoload.php'
 1. Support WP as a sub directory via filter `superpwa_output_path`.
 2. Override templates via a theme directory.
 3. Add to home screen optional support. 
-4. Skip waiting on new service-working install.
-5. Prevent doubling up of requests on initial cache.
-6. Setting to enable/disable the service worker.
-7. Add `wp-cli superpwa regenerate` command for generating service-worker file.
-8. Automatically disable fetch when `SCRIPT_DEBUG = true` to prevent cache when developing.
+4. Support Google Webfonts and Gravatars. Also now filter to whitelist additional cache domains 
+5. Skip waiting on new service-working install.
+6. Prevent doubling up of requests on initial cache.
+7. Setting to enable/disable the service worker.
+8. Add `wp-cli superpwa regenerate` command for generating service-worker file.
+9. Automatically disable fetch when `SCRIPT_DEBUG = true` to prevent cache when developing.
 
 -------------------------
 
