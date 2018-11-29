@@ -124,16 +124,16 @@ function superpwa_put_contents( $file, $content = null ) {
 /**
  * Read contents of a file using WP_Filesystem() functions
  *
- * @param	$file	Filename with path.
- * @param	$array	Set true to return read data as an array. False by default.
- * @return	(string|bool) The function returns the read data or false on failure.
+ * @param    string $file  Filename with path.
+ * @param    bool   $array Set true to return read data as an array. False by default.
  *
- * @since 	1.0
+ * @return    string|array|bool The function returns the read data or false on failure.
+ *
+ * @since    1.0
  */
 function superpwa_get_contents( $file, $array = false ) {
-
-	// Return false if no filename is provided
-	if ( empty( $file ) ) {
+	// Return false if no filename is provided or file does not exist
+	if ( empty( $file ) || ! file_exists( $file ) ) {
 		return false;
 	}
 
