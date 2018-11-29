@@ -6,38 +6,16 @@
  * Author: SuperPWA
  * Author URI: https://superpwa.com/?utm_source=superpwa-plugin&utm_medium=author-uri
  * Contributors: Arun Basil Lal, Jose Varghese, Mat Lipe
- * Version: 1.10.0
+ * Version: 1.10.1
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
-
-/**
- * ~ Directory Structure ~
- *
- * Based on the WordPress starter plugin template
- * @link https://github.com/arunbasillal/WordPress-Starter-Plugin
- *
- * /3rd-party/					- Functions for compatibility with 3rd party plugins and hosts.
- * /addons/ 					- Bundled add-ons
- * /admin/						- Plugin backend.
- * /functions/					- Functions and utilites.
- * /includes/					- External third party classes and libraries.
- * /languages/					- Translation files go here.
- * /public/ 					- Front end files go here.
- * index.php					- Dummy file.
- * license.txt					- GPL v2
- * loader.php					- Loads everything.
- * superpwa.php					- Main plugin file.
- * README.MD					- Readme for GitHub.
- * readme.txt					- Readme for WordPress plugin repository.
- * uninstall.php				- Fired when the plugin is uninstalled.
- */
+define( 'SUPERPWA_VERSION'	, '1.10.1' );
 
 // Exit if accessed directly
 if ( ! defined('ABSPATH') ) exit;
 
-if ( ! defined( 'SUPERPWA_VERSION' ) )		define( 'SUPERPWA_VERSION'	, '1.9.4' ); // SuperPWA current version
 if ( ! defined( 'SUPERPWA_PATH_ABS' ) ) 	define( 'SUPERPWA_PATH_ABS'	, plugin_dir_path( __FILE__ ) ); // Absolute path to the plugin directory. eg - /var/www/html/wp-content/plugins/super-progressive-web-apps/
 if ( ! defined( 'SUPERPWA_PATH_SRC' ) ) 	define( 'SUPERPWA_PATH_SRC'	, plugin_dir_url( __FILE__ ) ); // Link to the plugin folder. eg - https://example.com/wp-content/plugins/super-progressive-web-apps/
 
