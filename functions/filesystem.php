@@ -81,18 +81,6 @@ function superpwa_get_output_path() {
 	return apply_filters( 'superpwa_output_path', trailingslashit( ABSPATH ) );
 }
 
-/**
- * Get the url to be used to retrieve generate files
- *
- * @author Mat Lipe
- * @since  1.9.1
- *
- * @return string
- */
-function superpwa_get_output_url() {
-	return apply_filters( 'superpwa_output_url', trailingslashit( network_site_url() ) );
-}
-
 
 /**
  * Write to a file using WP_Filesystem() functions

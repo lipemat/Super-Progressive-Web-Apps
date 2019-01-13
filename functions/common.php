@@ -25,14 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return bool
  */
 function superpwa_is_enabled() {
-	$enabled = false;
-	if ( superpwa_is_pwa_ready() ) {
-		$settings = superpwa_get_settings();
-		$enabled  = $settings['enabled'];
-	}
-
-	return apply_filters( 'superpwa_is_enabled', $enabled );
-
+	return apply_filters( 'superpwa_is_enabled', superpwa_get_settings()['enabled'] );
 }
 
 /**
@@ -40,10 +33,18 @@ function superpwa_is_enabled() {
  *
  * @return (string|bool) AMP page url on success, false otherwise
  *
+ * @author Arun Basil Lal
+ * @author Maria Daniel Deepak <daniel@danieldeepak.com>
+ *
  * @since 1.2
  * @since 1.9 Added support for tagDiv AMP
+ * @since 2.0 require wp-admin/includes/plugin.php if is_plugin_active isn't defined
  */
 function superpwa_is_amp() {
+	if ( ! function_exists( 'is_plugin_active' ) ) {
+		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+	}
+
 
 	// AMP for WordPress - https://wordpress.org/plugins/amp
 	if ( is_plugin_active( 'amp/amp.php' ) ) {
@@ -55,7 +56,7 @@ function superpwa_is_amp() {
 		return defined( 'AMPFORWP_AMP_QUERY_VAR' ) ? AMPFORWP_AMP_QUERY_VAR . '/' : 'amp/';
 	}
 
-	// Better AMP � https://wordpress.org/plugins/better-amp/
+	// Better AMP - https://wordpress.org/plugins/better-amp/
 	if ( is_plugin_active( 'better-amp/better-amp.php' ) ) {
 		return 'amp/';
 	}
@@ -92,12 +93,11 @@ function superpwa_is_amp() {
  * @since 1.7 Added filter superpwa_manifest_start_url when $rel = true, for use with manifest. First ever filter in SuperPWA.
  */
 function superpwa_get_start_url( $rel = false ) {
-
 	// Get Settings
 	$settings = superpwa_get_settings();
 
 	// Start Page
-	$start_url = get_permalink( $settings['start_url'] ) ? get_permalink( $settings['start_url'] ) : get_bloginfo( 'wpurl' );
+	$start_url = get_permalink( $settings['start_url'] ) ? get_permalink( $settings['start_url'] ) : get_bloginfo( 'url' );
 
 	// Force HTTPS
 	$start_url = superpwa_httpsify( $start_url );

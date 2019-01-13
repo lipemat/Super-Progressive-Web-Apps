@@ -174,6 +174,15 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
 
+		// Display
+		add_settings_field(
+			'superpwa_display',									// ID
+			__('Display', 'super-progressive-web-apps'),		// Title
+			'superpwa_display_cb',								// CB
+			'superpwa_basic_settings_section',						// Page slug
+			'superpwa_basic_settings_section'						// Settings Section ID
+		);
+
 	// PWA Status
     add_settings_section(
         'superpwa_pwa_status_section',					// ID
@@ -224,7 +233,7 @@ function superpwa_validater_and_sanitizer( $settings ) {
 	$settings['app_name'] = sanitize_text_field( $settings['app_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_name'] );
 
 	// Sanitize Application Short Name
-	$settings['app_short_name'] = sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] );
+	$settings['app_short_name'] = substr( sanitize_text_field( $settings['app_short_name'] ) == '' ? get_bloginfo( 'name' ) : sanitize_text_field( $settings['app_short_name'] ), 0, 12 );
 
 	// Sanitize description
 	$settings['description'] = sanitize_text_field( $settings['description'] );
@@ -247,8 +256,11 @@ function superpwa_validater_and_sanitizer( $settings ) {
 /**
  * Get settings from database
  *
- * @since 	1.0
- * @return	array	A merged array of default and settings saved in database.
+ * @return (Array) A merged array of default and settings saved in database.
+ *
+ * @author Arun Basil Lal
+ *
+ * @since 1.0r
  */
 function superpwa_get_settings() {
 	$defaults = array(
@@ -266,6 +278,7 @@ function superpwa_get_settings() {
 		'start_url_amp'    => 0,
 		'offline_page'     => 0,
 		'orientation'      => 1,
+		'display'			=> 1,
 	);
 
 	return wp_parse_args( get_option( 'superpwa_settings' ), $defaults );
@@ -296,33 +309,6 @@ function superpwa_enqueue_css_js( $hook ) {
 add_action( 'admin_enqueue_scripts', 'superpwa_enqueue_css_js' );
 
 /**
- * Todo list after saving admin options
- *
- * Regenerate manifest
- * Regenerate service worker
- *
- * @since	1.0
- */
-function superpwa_after_save_settings_todo() {
-	$settings = superpwa_get_settings();
-	// Regenerate manifest
-	superpwa_generate_manifest();
-
-	if ( $settings['enabled'] ) {
-		// Regenerate service worker
-		superpwa_generate_sw();
-	} else {
-		superpwa_delete_sw();
-	}
-}
-add_action( 'add_option_superpwa_settings', 'superpwa_after_save_settings_todo' );
-//use the pre_update because we want this to run any time we hit save, not just when options update
-add_action( 'pre_update_option_superpwa_settings', function( $value ){
-	superpwa_after_save_settings_todo();
-	return $value;
-});
-
-/**
  * Admin footer text
  *
  * A function to add footer text to the settings page of the plugin.
@@ -330,8 +316,7 @@ add_action( 'pre_update_option_superpwa_settings', function( $value ){
  * @refer	https://codex.wordpress.org/Function_Reference/get_current_screen
  */
 function superpwa_footer_text( $default ) {
-
-	// Retun default on non-plugin pages
+	// Return default on non-plugin pages
 	$screen = get_current_screen();
 	if ( strpos( $screen->id, 'superpwa' ) === false ) {
 		return $default;
