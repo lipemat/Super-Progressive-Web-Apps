@@ -111,9 +111,10 @@ function superpwa_register_sw() {
 		'enabled'        => $settings['enabled'],
 		'addToHomeText'  => '<span class="dashicons dashicons-plus"></span> <span>' . __( 'Add To Home Screen', 'super-progressive-web-apps' ) . '</span> <span class="dashicons dashicons-no-alt dismiss"></span>',
 		'addToHomeColor' => $settings['theme_color'],
+		'addToHomeIncrement' => $settings['add_to_home_increment'],
 	] ) );
 
-	if ( superpwa_is_enabled() && $settings['add_to_home'] ) {
+	if ( $settings['add_to_home'] && superpwa_is_enabled() ) {
 		wp_enqueue_script( 'superpwa-add-to-home-screen', SUPERPWA_PATH_SRC . 'public/js/add-to-home-screen.js', [
 			'jquery',
 			'superpwa-register-sw',

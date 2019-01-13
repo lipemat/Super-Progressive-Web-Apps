@@ -120,6 +120,15 @@ function superpwa_register_settings() {
 		'superpwa_basic_settings_section'						// Settings Section ID
 	);
 
+	// Add To Home Prompt
+	add_settings_field(
+		'superpwa_add_to_home_increment',									// ID
+		__('Increment The Prompt', 'super-progressive-web-apps'),	// Title
+		'superpwa_add_to_home_increment_cb',								// Callback function
+		'superpwa_basic_settings_section',						// Page slug
+		'superpwa_basic_settings_section'						// Settings Section ID
+	);
+
 		// Splash Screen Background Color
 		add_settings_field(
 			'superpwa_background_color',							// ID
@@ -244,6 +253,7 @@ function superpwa_validater_and_sanitizer( $settings ) {
 function superpwa_get_settings() {
 	$defaults = array(
 		'add_to_home'      => 0,
+		'add_to_home_increment' => 0,
 		'app_name'         => get_bloginfo( 'name' ),
 		'app_short_name'   => get_bloginfo( 'name' ),
 		'description'      => get_bloginfo( 'description' ),

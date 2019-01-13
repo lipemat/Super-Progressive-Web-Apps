@@ -49,6 +49,29 @@ function superpwa_add_to_home_cb() {
 /**
  * Add To Home checkbox
  *
+ * @since 1.11.0
+ *
+ * @return void
+ */
+function superpwa_add_to_home_increment_cb() {
+	// Get Settings
+	$settings = superpwa_get_settings(); ?>
+
+	<fieldset>
+
+		<input type="checkbox" name="superpwa_settings[add_to_home_increment]" value="1" <?php checked( $settings['add_to_home_increment'] ); ?>/>
+
+		<p class="description">
+			<?php esc_html_e( 'Only show the user an add to home prompt from time to time instead of every page load.', 'super-progressive-web-apps' ); ?>
+		</p>
+	</fieldset>
+
+	<?php
+}
+
+/**
+ * Add To Home checkbox
+ *
  * @since 1.9.6
  *
  * @return void
