@@ -285,10 +285,10 @@ function superpwa_register_sw() {
 	}
 	wp_localize_script( 'superpwa-register-sw', 'superpwa_sw', apply_filters( 'superpwa_js_config', [
 		'url'            => parse_url( superpwa_sw( 'src' ), PHP_URL_PATH ),
-		'enabled'        => $settings['enabled'],
+		'enabled'        => (bool) $settings['enabled'],
 		'addToHomeText'  => '<span class="dashicons dashicons-plus"></span> <span>' . __( 'Add To Home Screen', 'super-progressive-web-apps' ) . '</span> <span class="dashicons dashicons-no-alt dismiss"></span>',
 		'addToHomeColor' => $settings['theme_color'],
-		'addToHomeIncrement' => $settings['add_to_home_increment'],
+		'addToHomeIncrement' => (bool) $settings['add_to_home_increment'],
 	] ) );
 
 	if ( $settings['add_to_home'] && superpwa_is_enabled() ) {
