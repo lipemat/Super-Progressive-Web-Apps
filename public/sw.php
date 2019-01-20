@@ -240,7 +240,7 @@ function superpwa_sw_template() {
 			//do nothing for fetch except post a message to console log se we know we have not cache
 			if (null === consoleLogTimeout) {
 				consoleLogTimeout = setTimeout(function () {
-					console.log('Fetching from cache is disabled because SCRIPT_DEBUG is true. To enable caching, set SCRIPT_DEBUG = false then regenerate the service-worker via `wp superpwa regenerate` or re-saving the settings.');
+					console.log('Fetching from cache is disabled because SCRIPT_DEBUG is true. To enable caching, set SCRIPT_DEBUG = false.');
 					consoleLogTimeout = null;
 				}, 1000);
 			}
