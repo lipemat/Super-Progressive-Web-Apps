@@ -5,7 +5,7 @@ Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app
 Requires at least: 4.4.0
 Tested up to: 5.0.3
 Requires PHP: 7.1.3
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
