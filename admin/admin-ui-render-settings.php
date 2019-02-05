@@ -402,6 +402,24 @@ function superpwa_display_cb() {
 }
 
 /**
+ * @since 2.1.0
+ *
+ * @return void
+ */
+function superpwa_must_cache_urls_cb() {
+	$urls = superpwa_get_settings()['must_cache_urls'];
+
+	?>
+    <label for="superpwa_settings[must_cache_urls]">
+        <textarea name="superpwa_settings[must_cache_urls]" class="widefat" rows="8"><?= esc_textarea( $urls ); ?></textarea>
+    </label>
+	<p class="description">
+		<?php esc_html_e( 'Commas separated list of additional URLs which will be cached even if they live in an excluded directory like `/wp-admin/`.', 'super-progressive-web-apps' ); ?>
+	</p>
+	<?php
+}
+
+/**
  * Manifest Status
  *
  * @author Arun Basil Lal

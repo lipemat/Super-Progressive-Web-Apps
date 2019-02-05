@@ -183,6 +183,15 @@ function superpwa_register_settings() {
 			'superpwa_basic_settings_section'						// Settings Section ID
 		);
 
+	// Display
+	add_settings_field(
+		'superpwa_must_cache_urls',
+		__('Must Cache Urls', 'super-progressive-web-apps'),
+		'superpwa_must_cache_urls_cb',
+		'superpwa_basic_settings_section',
+		'superpwa_basic_settings_section'
+	);
+
 	// PWA Status
     add_settings_section(
         'superpwa_pwa_status_section',					// ID
@@ -271,6 +280,7 @@ function superpwa_get_settings() {
 		'description'      => get_bloginfo( 'description' ),
 		'enabled'          => 0,
 		'icon'             => SUPERPWA_PATH_SRC . 'public/images/logo.png',
+		'must_cache_urls'  => '',
 		'splash_icon'      => SUPERPWA_PATH_SRC . 'public/images/logo-512x512.png',
 		'background_color' => '#D5E0EB',
 		'theme_color'      => '#D5E0EB',
