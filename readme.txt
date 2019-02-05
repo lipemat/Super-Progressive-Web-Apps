@@ -2,10 +2,10 @@
 Contributors: arunbasillal, josevarghese, superpwa, mat-lipe
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
-Requires at least: 4.4.0
+Requires at least: 4.6.0
 Tested up to: 5.0.3
 Requires PHP: 7.1.3
-Stable tag: 2.0.3
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
