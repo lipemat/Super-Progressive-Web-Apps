@@ -209,6 +209,10 @@ function superpwa_sw_template() {
 							cache.put( e.request, response.clone() );
 							return response;
 						} );
+					} ).catch( function() {
+						return caches.match( e.request ).then( function( response ) {
+							return response || caches.match( offlinePage );
+						} );
 					} )
 				);
 				return;
