@@ -108,6 +108,7 @@ function superpwa_sw_template() {
 		const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
 		const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
 		var filesToCache = <?php echo wp_json_encode( superpwa_get_must_cache_urls() ); ?>;
+		const networkFirstUrls = [<?php echo apply_filters( 'superpwa_sw_network_first_urls', '/\/wp-json/' ); ?>];
 		const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ); ?>];
 		const allowedOrigins = [<?php echo apply_filters( 'superpwa_sw_allowed_domain_patterns', '/https?:\/\/fonts.+/,/https?:\/\/secure\.gravatar\.com/' ); ?>];
 
@@ -185,6 +186,9 @@ function superpwa_sw_template() {
 				return;
 			}
 
+			// If this url specified to check the network first?
+			var networkFirst = isURLInPatterns( networkFirstUrls, e.request.url );
+
 			/**
 			 * For document loading "HTML" we use the network first
 			 * and fallback to cache only when unable to retrieve the content
@@ -198,7 +202,7 @@ function superpwa_sw_template() {
 			 * If not online ignore this block.
 			 *
 			 */
-			if ( e.request.mode === 'navigate' && navigator.onLine ) {
+			if ( ( networkFirst || e.request.mode === 'navigate' ) && navigator.onLine ) {
 				e.respondWith(
 					fetch( e.request ).then( function ( response ) {
 						return caches.open( cacheName ).then( function ( cache ) {
