@@ -178,6 +178,11 @@ Feel free to get in touch if you have any questions.
 
 == Changelog ==
 
+= 2.2.0
+* Add `superpwa_sw_network_first_urls` filter for adding "network first" URLs.
+* An add-to-home class is now set on the body tag when the "add to home" prompt is showing.
+* Network first calls will now fallback to cache if the network is online and the request still fails.
+
 = 2.0 =
 * Date: [28.December.2018](https://superpwa.com/superpwa-2-0/)
 * Tested with WordPress 5.0.2. 
@@ -188,108 +193,6 @@ Feel free to get in touch if you have any questions.
 * Enhancement: Added PHP CodeSniffer to stick to "WordPress-Extra" coding standards. Thanks Daniel for the work. 
 * Enhancement: SuperPWA is available in 12 languages now, thanks to the awesome translators! Translators are credited in the [release note](https://superpwa.com/superpwa-2-0/). 
 
-= 1.9 =
-* Date: [25.July.2018](https://superpwa.com/superpwa-1-9-chrome-mini-infobar-ready/?utm_source=wordpress.org&utm_medium=changelog)
-* Tested with WordPress 4.9.7. 
-* Enhancement: Added compatibility with Google Chrome 68 Mini Info-Bar. 
-* Enhancement: Added support for tagDiv AMP Plugin which ships with Newspaper theme and Newsmag theme. If you use this theme, you can now use AMP version of the start page. 
-* Enhancement: Added support for images in offline page. Images added to offline page are now cached during service worker activation. 
-* Enhancement: Improved the service worker installation routine to handle invalid entities in the service worker dependencies. 
-* Enhancement: SuperPWA is now translated to French, thanks to [@romainvincent](https://profiles.wordpress.org/romainvincent) and Spanish, thanks to [@arkangel](https://profiles.wordpress.org/arkangel/). 
-* Bug Fix: Fixed issue where translation files in /languages/ folder was not being loaded. 
-
-= 1.8.1 =
-* Date: [05.June.2018](https://superpwa.com/push-notifications-are-here-again/?utm_source=wordpress.org&utm_medium=changelog#1.8.1)
-* Enhancement: Added an admin notice with [instructions for OneSignal integration](https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=wordpress.org&utm_medium=changelog). 
-* Enhancement: Updated console log message for URLs excluded from cache for better clarity. 
-
-= 1.8 =
-* Date: [31.May.2018](https://superpwa.com/push-notifications-are-here-again/?utm_source=wordpress.org&utm_medium=changelog)
-* Tested with WordPress 4.9.6. 
-* New Add-On: Apple Touch Icons. Set the Application Icon and Splash Screen Icon as Apple Touch Icons for compatibility with iOS devices. 
-* Enhancement: Added support for Add to Home Screen prompt for Chrome 68 and beyond. 
-* Enhancement: Better add-on activation and deactivation by hooking onto admin_post action. 
-* Enhancement: Attempt to generate manifest and service worker automatically on visiting the SuperPWA settings page after adjusting root folder permissions. 
-* Enhancement: Generated a .pot file with all strings for translation. You can also translate SuperPWA to your language by visiting [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/super-progressive-web-apps) 
-* Bug Fix: Compatibility issues with OneSignal are resolved for single installs. 
-* Bug Fix: Updated plugin action links and admin notices with the correct admin menu link. 
-
-= 1.7.1 =
-* Date: 05.May.2018
-* Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context".
-
-= 1.7 =
-* Date: [03.May.2018](https://superpwa.com/introducing-add-ons-for-superpwa/?utm_source=wordpress.org&utm_medium=changelog)
-* Minimum required WordPress version is now 3.6.0 (previously 3.5.0).
-* New Feature: Add-Ons for SuperPWA is here!
-* New Feature: SuperPWA is now a top-level menu to accommodate for the Add-Ons sub-menu page.
-* New Feature: Add UTM Tracking parameters to the Start URL with the [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=wordpress.org&utm_medium=changelog).
-* Enhancement: Service worker URLs are now relative to accommodate for domain mapped Multisites.
-* Bug Fix: Incorrect start_url when WordPress is installed in a folder, or when inner pages are used as start_url.
-* Bug Fix: Incorrect manifest and service worker URLs when WordPress is installed in a folder. 
-
-= 1.6 =
-* Date: [23.April.2018](https://superpwa.com/1-6-released-multisite-network-support/?utm_source=wordpress.org&utm_medium=changelog)
-* New Feature: WordPress Multisite Network Compatibility. One of the most requested features for SuperPWA is now here! Thanks [@juslintek](https://wordpress.org/support/topic/add-manifest-json-support-for-multisite/#post-9998629) for doing a major share of the heavy lifting.
-* New Feature: Added description to the manifest. You can now include a brief description of what your app is about. 
-* Enhancement: Moved manifest to the very top of wp_head for better compatibility with some browsers.
-* Enhancement: Improved the file and folder naming, organization, and inline documentation for better readability.
-* Enhancement: Force https:// on all assets and dependencies solving the problem of http:// URLs in manifest and service worker once and for all.
-* Enhancement: Relative URL for manifest for out of the box compatibility with CDN's.
-* Enhancement: Removed forcing of trailing slash on manifest and service worker URLs for better compatibility. 
-
-= 1.5 =
-* Date: 18.March.2018
-* New Feature: OneSignal integration for Push notifications.
-* Enhancement: Moved manifest to the top of wp_head for easier detection by browsers. 
-* Enhancement: Added support for custom AMP endpoints for AMP for WordPress and AMP for WP.
-* Enhancement: Added UI notice when using AMP for WordPress to warn user not to use the AMP version of start page if the start page is the homepage, the blog index, or the archives page.
-
-= 1.4 =
-* Date: [21.February.2018](https://wordpress.org/support/topic/you-asked-and-we-listened-superpwa-1-4-ships-with-two-user-feature-requests/)
-* New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape". [Feature request from @doofustoo](https://wordpress.org/support/topic/almost-perfect-335/).
-* New Feature: Added UI for theme_color property in manifest. [Feature request from @krunalsm](https://wordpress.org/support/topic/diffrent-theme_color-and-background_color/).
-* Enhancement: Improved compatibility with all major Accelerated Mobile Pages (AMP) plugins.
-* Enhancement: Improved handling of external resources. 
-
-= 1.3.1 =
-* Date: 15.February.2018
-* Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 
-* Enhancement: Improved how start_url is handled in the manifest.
-* Enhancement: Better handling of external resources.
-
-= 1.3 =
-* Date: 10.February.2018
-* New Feature: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen of your Progressive Web App.
-* Enhancement: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
-* Enhancement: Improved in-browser service worker update handling.
-* Enhancement: Added automatic upgrade of manifest and service worker on plugin upgrade.
-* Bug Fix: Only GET requests are served from the cache now. Fixes [this](https://wordpress.org/support/topic/errors-in-firefox-and-chrome/).
-
-= 1.2 =
-* Date: 06.February.2018
-* New Feature: Support for theme-color.
-* New Feature: Now you can edit the Application Name and Application Short name.
-* New Feature: Set the start page of your PWA.
-* New Feature: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
-* UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
-* UI Improvement: Added admin notice with a link to settings page on plugin activation.
-* UI Improvement: Added checks for manifest, service worker and HTTPS and display the status neatly in the UI.
-* Bug Fix: Fix a parse error that showed up only on PHP 5.3. 
-
-= 1.1.1 =
-* Date: 30.January.2018
-* Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
-
-= 1.1 =
-* Date: 28.January.2018
-* New Feature: Aggressive caching of pages using CacheStorage API.
-* New Feature: Pages once cached are served even if the user is offline. 
-* New Feature: Set custom offline page. Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
-
-= 1.0 =
-* Date: 22.January.2018
-* First release of the plugin.
 
 == Upgrade Notice ==
 
@@ -310,82 +213,3 @@ Feel free to get in touch if you have any questions.
 * Enhancement: Improved the service worker installation routine to handle invalid entities in the service worker dependencies. 
 * Enhancement: SuperPWA is now translated to French, thanks to @romainvincent and Spanish, thanks to @arkangel. 
 * Bug Fix: Fixed issue where translation files in /languages/ folder was not being loaded. 
-
-= 1.8.1 =
-* Enhancement: Added an admin notice with instructions for OneSignal integration. 
-* Enhancement: Updated console log message for URLs excluded from cache for better clarity. 
-
-= 1.8 =
-* Tested with WordPress 4.9.6. 
-* New Add-On: Apple Touch Icons. Set the Application Icon and Splash Screen Icon as Apple Touch Icons for compatibility with iOS devices. 
-* Enhancement: Added support for Add to Home Screen prompt for Chrome 68 and beyond. 
-* Enhancement: Better add-on activation and deactivation by hooking onto admin_post action. 
-* Enhancement: Attempt to generate manifest and service worker automatically on visiting the SuperPWA settings page after adjusting root folder permissions. 
-* Enhancement: Generated a .pot file with all strings for translation. You can also translate SuperPWA to your language by visiting translate.wordpress.org/projects/wp-plugins/super-progressive-web-apps 
-* Bug Fix: Compatibility issues with OneSignal are resolved for single installs. 
-* Bug Fix: Updated plugin action links and admin notices with the correct admin menu link. 
-
-= 1.7.1 =
-* Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context".
-
-= 1.7 =
-* Minimum required WordPress version is now 3.6.0 (previously 3.5.0).
-* New Feature: Add-Ons for SuperPWA is here!
-* New Feature: SuperPWA is now a top-level menu to accommodate for the Add-Ons sub-menu page.
-* New Feature: Add UTM Tracking parameters to the Start URL with the [UTM Tracking Add-On](https://superpwa.com/addons/utm-tracking/?utm_source=wordpress.org&utm_medium=upgrade-notice).
-* Enhancement: Service worker URLs are now relative to accommodate for domain mapped Multisites.
-* Bug Fix: Incorrect start_url when WordPress is installed in a folder, or when inner pages are used as start_url.
-* Bug Fix: Incorrect manifest and service worker URLs when WordPress is installed in a folder. 
-
-= 1.6 =
-* New Feature: WordPress Multisite Network Compatibility. One of the most requested features for SuperPWA is now here! Thanks [@juslintek](https://wordpress.org/support/topic/add-manifest-json-support-for-multisite/#post-9998629) for doing a major share of the heavy lifting.
-* New Feature: Added description to the manifest. You can now include a brief description of what your app is about. 
-* Enhancement: Moved manifest to the very top of wp_head for better compatibility with some browsers.
-* Enhancement: Improved the file and folder naming, organization, and inline documentation for better readability.
-* Enhancement: Force https:// on all assets and dependencies solving the problem of http:// URLs in manifest and service worker once and for all.
-* Enhancement: Relative URL for manifest for out of the box compatibility with CDN's.
-* Enhancement: Removed forcing of trailing slash on manifest and service worker URLs for better compatibility. 
-
-= 1.5 =
-* New Feature: OneSignal integration for Push notifications.
-* Enhancement: Moved manifest to the top of wp_head for easier detection by browsers. 
-* Enhancement: Added support for custom AMP endpoints for AMP for WordPress and AMP for WP.
-* Enhancement: Added UI notice when using AMP for WordPress to warn user not to use the AMP version of start page if the start page is the homepage, the blog index, or the archives page.
-
-= 1.4 =
-* New Feature: Added UI for default orientation of your PWA. Orientation can now be set as "any", "portrait" or "landscape".
-* New Feature: Added UI for theme_color property in manifest.
-* Enhancement: Improved compatibility with all major Accelerated Mobile Pages (AMP) plugins.
-* Enhancement: Improved handling of external resources. 
-
-= 1.3.1 =
-* Enhancement: Improved how Start Page url is handled in the service worker to be compatible with plugins that force SSL. 
-* Enhancement: Improved how start_url is handled in the manifest.
-* Enhancement: Better handling of external resources.
-
-= 1.3 =
-* New Feature: Added support for high-quality splash screen. You can now set the 512x512 icon for the splash screen of your Progressive Web App.
-* Enhancement: Super Progressive Web Apps now accounts for content updates and will update the cache as you update the website. 
-* Enhancement: Improved in-browser service worker update handling.
-* Enhancement: Added automatic upgrade of manifest and service worker on plugin upgrade.
-
-= 1.2 =
-* New Feature: Support for theme-color.
-* New Feature: Now you can edit the Application Name and Application Short name.
-* New Feature: Set the start page of your PWA.
-* New Feature: Set AMP version of the start page. Supported plugins: AMP for WordPress, AMP for WP, Better AMP, AMP Supremacy, WP AMP.
-* UI Improvement: Better organization of plugin settings. More intuitive with inline help. 
-* UI Improvement: Added admin notice with a link to settings page on plugin activation.
-* UI Improvement: Added checks for manifest, service worker and HTTPS and display the status neatly in the UI.
-* Bug Fix: Fix a parse error that showed up only on PHP 5.3. 
-
-= 1.1.1 =
-* Bug Fix: Fix fatal error in PHP versions prior to PHP 5.5. "Cant use function return value in write context". PHP manual says "Prior to PHP 5.5, empty() only supports variables; anything else will result in a parse error."
-
-= 1.1 =
-* New Feature: Aggressive caching of pages using CacheStorage API.
-* New Feature: Pages once cached are served even if the user is offline. 
-* New Feature: Set custom offline page: Select the page you want the user to see when a page that isn't in the cache is accessed and the user is offline.
-
-= 1.0 =
-* First release of the plugin.
