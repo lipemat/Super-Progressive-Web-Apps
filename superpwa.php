@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Super Progressive Web Apps
- * Plugin URI: https://matlipe.com
+ * Plugin URI: https://onpointplugins.com
  * Description: Convert your WordPress website into a Progressive Web App
  * Author: Mat Lipe
- * Author URI: https://matlipe.com
+ * Author URI: https://onpointplugins.com
  * Contributors: Arun Basil Lal, Jose Varghese, Mat Lipe
  * Version: 2.3.0
  * Text Domain: super-progressive-web-apps
