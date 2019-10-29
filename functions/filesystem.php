@@ -18,6 +18,7 @@ if ( ! defined('ABSPATH') ) exit;
  * will bust on a new version of this plugin.
  *
  * @since 1.9.2
+ * @since 2.2.3 (add filter `superpwa_resource_version`)
  *
  * @return null|string
  */
@@ -26,7 +27,7 @@ function superpwa_get_resources_version() {
 		return \Lipe\Lib\Theme\Styles::in()->get_version();
 	}
 
-	return SUPERPWA_VERSION;
+	return apply_filters( 'superpwa_resource_version', SUPERPWA_VERSION );
 }
 
 /**

@@ -105,7 +105,7 @@ function superpwa_sw_template() {
 	ob_start(); ?>
 	<script>
 		'use strict';
-		const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . SUPERPWA_VERSION; ?>';
+		const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . superpwa_get_resources_version(); ?>';
 		const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
 		var filesToCache = <?php echo wp_json_encode( superpwa_get_must_cache_urls() ); ?>;
 		const networkFirstUrls = [<?php echo apply_filters( 'superpwa_sw_network_first_urls', '/\/wp-json/' ); ?>];
