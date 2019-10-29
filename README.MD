@@ -23,3 +23,4 @@ require __DIR__ . '/vendor/autoload.php'
 7. Setting to enable/disable the service worker.
 9. Automatically disable fetch when `SCRIPT_DEBUG = true` to prevent cache when developing.
 10. Setting to add "Must Cache" urls which will be added to the cache even no matter where they live. Useful when using a script from `/wp-admin` which would normally be excluded.
+11. Browser cache may be flushed programmatically via the `superpwa_resource_version` filter or by using the version handling found in [wordpress-libs](github.com/lipemat/wordpress-libs) -> `\Lipe\Lib\Theme\Styles`.
