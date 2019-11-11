@@ -163,6 +163,11 @@ function superpwa_sw_template() {
 
 		// Fetch
 		self.addEventListener( 'fetch', function ( e ) {
+			// For POST requests, do not use this.
+			if ( e.request.method !== 'GET' ) {
+				return;
+			}
+
 			// Return if the current request url is in the never cache list and
 			// not in the filesToCache list after stripping query args.
 			if ( isURLInPatterns( neverCacheUrls, e.request.url ) && filesToCache.indexOf( e.request.url.substring(0, e.request.url.indexOf('?') ) ) === -1 ) {
@@ -176,15 +181,7 @@ function superpwa_sw_template() {
 				return;
 			}
 
-			// For POST requests, do not use the cache. Serve offline page if offline.
-			if ( e.request.method !== 'GET' ) {
-				e.respondWith(
-					fetch( e.request ).catch( function () {
-						return caches.match( offlinePage );
-					} )
-				);
-				return;
-			}
+
 
 			// If this url specified to check the network first?
 			var networkFirst = isURLInPatterns( networkFirstUrls, e.request.url );
