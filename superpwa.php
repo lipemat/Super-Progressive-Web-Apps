@@ -6,12 +6,12 @@
  * Author: Mat Lipe
  * Author URI: https://onpointplugins.com
  * Contributors: Arun Basil Lal, Jose Varghese, Mat Lipe
- * Version: 2.3.0
+ * Version: 2.3.1
  * Text Domain: super-progressive-web-apps
  * Domain Path: /languages
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
-define( 'SUPERPWA_VERSION', '2.3.0' );
+define( 'SUPERPWA_VERSION', '2.3.1' );
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
