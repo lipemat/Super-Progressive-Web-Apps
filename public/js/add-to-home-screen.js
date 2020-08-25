@@ -8,7 +8,8 @@
 	 */
 	var setupPrompt = function (deferredPrompt) {
 		var el = $('<div id="superpwa-add-to-home" style="background:' + config.addToHomeColor + '; display:none">' + config.addToHomeText + '</div>');
-		$( 'body' )
+		var body = $( 'body' );
+		body
 			.prepend( el )
 			.addClass( 'add-to-home' );
 		$(el).slideDown();
@@ -18,6 +19,7 @@
 		 */
 		el.on('click', 'span', function (e) {
 			el.remove();
+			body.removeClass( 'add-to-home' );
 
 			if ($(this).hasClass('dismiss')) {
 				dismiss();
@@ -44,6 +46,7 @@
 					var position = ($(document).height() - $(this).height() - $(this).scrollTop());
 					if (position <= 50) {
 						el.slideUp();
+						body.removeClass( 'add-to-home' );
 					}
 					scrollTimeout = null;
 				}, 500);
