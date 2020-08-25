@@ -3,9 +3,9 @@ Contributors: arunbasillal, josevarghese, superpwa, mat-lipe
 Donate link: http://millionclues.com/donate/
 Tags: pwa, progressive web apps, manifest, web manifest, android app, chrome app, add to homescreen, mobile web
 Requires at least: 4.8.0
-Tested up to: 5.2.4
+Tested up to: 5.5.0
 Requires PHP: 7.1.3
-Stable tag: 2.3.1
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -177,8 +177,12 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+= 2.4.0 =
+* [Support Mask icons](https://github.com/SuperPWA/Super-Progressive-Web-Apps/commit/9b0e43840231077537de8b528fca25fbdc361560)
+* Latest onesignal support from upstream.
+* Only add 'add-to-home' class to `body` when prompt is open.
 
-= 2.2.0
+= 2.2.0 =
 * Add `superpwa_sw_network_first_urls` filter for adding "network first" URLs.
 * An add-to-home class is now set on the body tag when the "add to home" prompt is showing.
 * Network first calls will now fallback to cache if the network is online and the request still fails.
