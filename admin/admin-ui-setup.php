@@ -225,9 +225,6 @@ function superpwa_register_settings() {
 			'superpwa_https_status_cb',								// CB
 			'superpwa_pwa_status_section',							// Page slug
 			'superpwa_pwa_status_section'							// Settings Section ID
-<<<<<<< HEAD
-		);
-=======
 		);
 
 
@@ -235,18 +232,10 @@ function superpwa_register_settings() {
 	// PWA Advance settings
     add_settings_section(
         'superpwa_pwa_advance_section',					// ID
-        __('Advance', 'super-progressive-web-apps'),		// Title
+        __return_false(),		// Title
         '__return_false',								// Callback Function
         'superpwa_pwa_advance_section'					// Page slug
     );
-    	// Disabling "Add to home screen"
-		add_settings_field(
-			'superpwa_disable_add_to_home',								// ID
-			__('Disabling "Add to home screen"', 'super-progressive-web-apps'),				// Title
-			'superpwa_disable_add_to_home_cb',								// CB
-			'superpwa_pwa_advance_section',							// Page slug
-			'superpwa_pwa_advance_section'							// Settings Section ID
-		);
 		// App shortcuts
 		add_settings_field(
 			'superpwa_app_shortcut',								// ID
@@ -255,7 +244,6 @@ function superpwa_register_settings() {
 			'superpwa_pwa_advance_section',							// Page slug
 			'superpwa_pwa_advance_section'							// Settings Section ID
 		);
->>>>>>> 3babb8a (#147 added the shorcuts)
 }
 add_action( 'admin_init', 'superpwa_register_settings' );
 
