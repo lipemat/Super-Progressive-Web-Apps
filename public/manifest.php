@@ -105,8 +105,8 @@ function superpwa_manifest_template() {
 	$manifest['theme_color']      = $settings['theme_color'];
 	$manifest['display']          = superpwa_get_display();
 	$manifest['orientation']      = superpwa_get_orientation();
-	$manifest['start_url']        = superpwa_get_start_url( true );
-	$manifest['scope']            = superpwa_get_scope();
+	$manifest['start_url']        = user_trailingslashit(superpwa_get_start_url( true ));
+	$manifest['scope']            = user_trailingslashit(superpwa_get_scope());
 
 	/**
 	 * Values that go in to Manifest JSON.
