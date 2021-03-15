@@ -43,11 +43,17 @@ function superpwa_onesignal_todo() {
 
 			// Import OneSignal service worker in PWA
 			add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
-		}
+		}else{
+			//Added filter for multisites
+			// Add gcm_sender_id to SuperPWA manifest
+			add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
 
-		// Show admin notice.
-		add_action( 'admin_notices', 'superpwa_onesignal_admin_notices', 9 );
-		add_action( 'network_admin_notices', 'superpwa_onesignal_admin_notices', 9 );
+			// Change service worker filename to match OneSignal's service worker
+			add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
+
+			// Import OneSignal service worker in SuperPWA
+			add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
+		}
 	}
 }
 
@@ -86,21 +92,21 @@ function superpwa_onesignal_add_gcm_sender_id( $manifest ) {
  * @since  1.8
  */
 function superpwa_onesignal_sw_filename( $sw_filename ) {
-	return 'OneSignalSDKWorker.js.php';
+	return 'OneSignalSDKWorker' . superpwa_multisite_filename_postfix() . '.js.php';
 }
 
 /**
- * Import OneSignal service worker in PWA
+ * Import OneSignal service worker in SuperPWA
  *
- * @param  (string) $sw Service worker template of PWA passed via superpwa_sw_template filter
+ * @param (string) $sw Service worker template of SuperPWA passed via superpwa_sw_template filter
  *
- * @author Arun Basil Lal
+ * @return (string) Import OneSignal's service worker into SuperPWA
  *
- * @since  1.8
- * @since  2.0 Removed content-type header for compatibility with dynamic service workers.
- * @since  2.0.1 Added back compatibility with static service workers by sending content-type header.
- * @return (string) Import OneSignal's service worker into PWA
+ * @author SuperPWA Team
  *
+ * @since 1.8
+ * @since 2.0 Removed content-type header for compatibility with dynamic service workers.
+ * @since 2.0.1 Added back compatibility with static service workers by sending content-type header.
  */
 function superpwa_onesignal_sw( $sw ) {
 	/**
@@ -130,12 +136,12 @@ function superpwa_onesignal_sw( $sw ) {
  *
  * Regenerates PWA manifest with the gcm_sender_id added.
  * Delete current service worker.
- * Regenerate PWA service worker with the new filename.
+ * Regenerate SuperPWA service worker with the new filename.
  *
- * @author Arun Basil Lal
+ * @author SuperPWA Team
  *
- * @since  1.8
- * @since  1.8.1 Excluded multisites. No OneSignal compatibility on multisites yet. In 1.8 onesignal.php was not loaded for multisites.
+ * @since 1.8
+ * @since 1.8.1 Excluded multisites. No OneSignal compatibility on multisites yet. In 1.8 onesignal.php was not loaded for multisites.
  */
 function superpwa_onesignal_activation() {
 	// Do not do anything for multisites
@@ -166,6 +172,7 @@ add_action( 'activate_onesignal-free-web-push-notifications/onesignal.php', 'sup
 
 /**
  * OneSignal deactivation todo
+<<<<<<< HEAD
  *
  * Regenerates PWA manifest.
  * Delete current service worker.
@@ -175,6 +182,17 @@ add_action( 'activate_onesignal-free-web-push-notifications/onesignal.php', 'sup
  *
  * @since  1.8
  * @since  1.8.1 Excluded multisites. No OneSignal compatibility on multisites yet. In 1.8 onesignal.php was not loaded for multisites.
+=======
+ *
+ * Regenerates SuperPWA manifest.
+ * Delete current service worker.
+ * Regenerate SuperPWA service worker.
+ *
+ * @author SuperPWA Team
+ *
+ * @since 1.8
+ * @since 1.8.1 Excluded multisites. No OneSignal compatibility on multisites yet. In 1.8 onesignal.php was not loaded for multisites.
+>>>>>>> 8360c8b (#94 Added compatibility for multisite onesignal)
  */
 function superpwa_onesignal_deactivation() {
 	// Do not do anything for multisites
