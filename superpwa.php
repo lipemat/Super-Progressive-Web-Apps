@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Super Progressive Web Apps
+ * Plugin Name: Progressive Web Apps
  * Plugin URI: https://onpointplugins.com
  * Description: Convert your WordPress website into a Progressive Web App
  * Author: Mat Lipe

@@ -25,13 +25,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function superpwa_add_menu_links() {
 
 	// Main menu page
-	add_menu_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'PWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render', SUPERPWA_PATH_SRC. 'admin/img/superpwa-menu-icon.png', 100 );
+	add_menu_page( __( 'Progressive Web Apps', 'super-progressive-web-apps' ), __( 'PWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render', SUPERPWA_PATH_SRC. 'admin/img/superpwa-menu-icon.png', 100 );
 
 	// Settings page - Same as main menu page
-	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Settings', 'super-progressive-web-apps' ), 'manage_options', 'superpwa', 'superpwa_admin_interface_render' );
+	add_submenu_page( 'superpwa', __( 'Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Settings', 'super-progressive-web-apps' ), 'manage_options', 'superpwa', 'superpwa_admin_interface_render' );
 
 	// Add-Ons page
-	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Add-Ons', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-addons', 'superpwa_addons_interface_render' );
+	add_submenu_page( 'superpwa', __( 'Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Add-Ons', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-addons', 'superpwa_addons_interface_render' );
 }
 add_action( 'admin_menu', 'superpwa_add_menu_links' );
 

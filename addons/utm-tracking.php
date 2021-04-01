@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function superpwa_utm_tracking_sub_menu() {
 
 	// UTM Tracking sub-menu
-	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'UTM Tracking', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-utm-tracking', 'superpwa_utm_tracking_interface_render' );
+	add_submenu_page( 'superpwa', __( 'Progressive Web Apps', 'super-progressive-web-apps' ), __( 'UTM Tracking', 'super-progressive-web-apps' ), 'manage_options', 'superpwa-utm-tracking', 'superpwa_utm_tracking_interface_render' );
 }
 add_action( 'admin_menu', 'superpwa_utm_tracking_sub_menu' );
 

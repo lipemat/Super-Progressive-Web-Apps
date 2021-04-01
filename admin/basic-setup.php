@@ -102,7 +102,7 @@ function superpwa_admin_notices() {
 		$screen = get_current_screen();
 		$superpwa_ui_link_text = ( strpos( $screen->id, 'superpwa' ) === false ) ? sprintf( __( '<a href="%s">Customize your app &rarr;</a>', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) : '';
 
-		echo '<div class="updated notice is-dismissible"><p>' . __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> ', 'super-progressive-web-apps' ) . $superpwa_is_ready . $superpwa_ui_link_text . '</p></div>';
+		echo '<div class="updated notice is-dismissible"><p>' . __( 'Thank you for installing <strong>Progressive Web Apps!</strong> ', 'super-progressive-web-apps' ) . $superpwa_is_ready . $superpwa_ui_link_text . '</p></div>';
 
 		// Delete transient
 		delete_transient( 'superpwa_admin_notice_activation' );
@@ -136,7 +136,7 @@ function superpwa_network_admin_notices() {
 
 		$superpwa_is_ready = superpwa_is_pwa_ready() ? 'Your app is ready on the main website with the default settings. ' : '';
 
-		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Super Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a><br/>Note: manifest and service worker for the individual websites will be generated on the first visit to the respective WordPress admin.', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) . '</p></div>';
+		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( 'Thank you for installing <strong>Progressive Web Apps!</strong> '. $superpwa_is_ready .'<a href="%s">Customize your app &rarr;</a><br/>Note: manifest and service worker for the individual websites will be generated on the first visit to the respective WordPress admin.', 'super-progressive-web-apps' ), admin_url( 'admin.php?page=superpwa' ) ) . '</p></div>';
 
 		// Delete transient
 		delete_transient( 'superpwa_network_admin_notice_activation' );
