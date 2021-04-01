@@ -107,9 +107,9 @@ function superpwa_sw_template() {
 		'use strict';
 		const cacheName = '<?php echo parse_url( get_bloginfo( 'wpurl' ), PHP_URL_HOST ) . '-superpwa-' . superpwa_get_resources_version(); ?>';
 		const offlinePage = '<?php echo get_permalink( $settings['offline_page'] ) ? superpwa_httpsify( get_permalink( $settings['offline_page'] ) ) : superpwa_httpsify( get_bloginfo( 'wpurl' ) ); ?>';
-		var filesToCache = <?php echo wp_json_encode( superpwa_get_must_cache_urls() ); ?>;
+		var dependencyUrls = <?php echo wp_json_encode( superpwa_get_must_cache_urls() ); ?>;
 		const networkFirstUrls = [<?php echo apply_filters( 'superpwa_sw_network_first_urls', '/\/wp-json/' ); ?>];
-		const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/' ); ?>];
+		const neverCacheUrls = [<?php echo apply_filters( 'superpwa_sw_never_cache_urls', '/\/wp-admin/,/\/wp-login/,/preview=true/,/\/dev/' ); ?>];
 		const allowedOrigins = [<?php echo apply_filters( 'superpwa_sw_allowed_domain_patterns', '/https?:\/\/fonts.+/,/https?:\/\/secure\.gravatar\.com/' ); ?>];
 
 		<?php
@@ -118,6 +118,7 @@ function superpwa_sw_template() {
 
 		// Install
 		self.addEventListener( 'install', function ( e ) {
+
 			//we are not going to wait
 			self.skipWaiting();
 
@@ -126,7 +127,7 @@ function superpwa_sw_template() {
 				caches.open( cacheName ).then( function ( cache ) {
 					console.log( 'PWA service worker caching dependencies' );
 					var _cached = [];
-					filesToCache.map( function ( url ) {
+					dependencyUrls.map( function ( url ) {
 						//to prevent doubling up
 						if ( _cached.indexOf( url ) !== -1 ) {
 							return;
@@ -168,9 +169,8 @@ function superpwa_sw_template() {
 				return;
 			}
 
-			// Return if the current request url is in the never cache list and
-			// not in the filesToCache list after stripping query args.
-			if ( isURLInPatterns( neverCacheUrls, e.request.url ) && filesToCache.indexOf( e.request.url.substring(0, e.request.url.indexOf('?') ) ) === -1 ) {
+			// Return if the current request url is in the never cache list and not a dependency.
+			if ( isURLInPatterns( neverCacheUrls, e.request.url ) && ! isDependencyUrl( e.request.url ) ) {
 				console.log( "Current request %s is excluded from cache.", e.request.url );
 				return;
 			}
@@ -273,6 +273,18 @@ function superpwa_sw_template() {
 				var regex = new RegExp( pattern );
 				return regex.test( url );
 			} );
+		}
+
+		/**
+		 * Is this URL in the list of dependencies?
+		 *
+		 * @param {string} url
+		 */
+		function isDependencyUrl( url ) {
+			if ( -1 !== url.indexOf( '?' ) ) {
+				url = url.substring( 0, url.indexOf( '?' ) );
+			}
+			return -1 !== dependencyUrls.indexOf( url );
 		}
 	</script>
 	<?php return apply_filters( 'superpwa_sw_template', strip_tags( ob_get_clean() ) );
