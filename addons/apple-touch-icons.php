@@ -237,7 +237,7 @@ function superpwa_apple_icons_validater_sanitizer( $settings ) {
 
     // Sanitize and validate campaign source. Campaign source cannot be empty.
 	$settings['background_color'] = sanitize_text_field( $settings['background_color'] ) == '' ? '' : sanitize_text_field( $settings['background_color'] );
-    if($settings['ios_splash_icon']){
+    if( ! empty( $settings['ios_splash_icon'] ) ){
         print_r($settings['ios_splash_icon']);die;;
     }
 

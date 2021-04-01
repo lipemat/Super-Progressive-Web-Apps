@@ -511,11 +511,11 @@ function superpwa_app_shortcut_link_cb() {
  * Enable or disable the yandex support
  *
  * @since 2.1.4
- */ 
+ */
 function superpwa_yandex_support_cb() {
 	// Get Settings
-	$settings = superpwa_get_settings(); 
-	?><input type="checkbox" name="superpwa_settings[yandex_support]" id="superpwa_settings[yandex_support]" value="1" 
+	$settings = superpwa_get_settings();
+	?><input type="checkbox" name="superpwa_settings[yandex_support]" id="superpwa_settings[yandex_support]" value="1"
 	<?php if ( isset( $settings['yandex_support'] ) ) { checked( '1', $settings['yandex_support'] ); } ?>>
 	<br>
 	<?php
@@ -554,6 +554,7 @@ function superpwa_admin_interface_render() {
 		<form action="options.php" method="post" enctype="multipart/form-data">
 			<?php
 			// Output nonce, action, and option_page fields for a settings page.
+			settings_fields( 'superpwa_settings_group' );
 			?>
 			<div class="spwa-tab">
 			  <a id="spwa-default" class="spwa-tablinks" onclick="openCity(event, 'settings')">Settings</a>
@@ -569,9 +570,6 @@ function superpwa_admin_interface_render() {
 				// Output save settings button
 				echo '<style>.submit{float:left;}</style>';
 				submit_button( __('Save Settings', 'super-progressive-web-apps') );
-				if(!defined('SUPERPWA_PRO_VERSION')){
-					echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
-				}
 			?>
 			</div>
 			<div id="advance" class="spwa-tabcontent">
@@ -581,9 +579,6 @@ function superpwa_admin_interface_render() {
 			  	// Output save settings button
 				echo '<style>.submit{float:left;}</style>';
 				submit_button( __('Save Settings', 'super-progressive-web-apps') );
-				if(!defined('SUPERPWA_PRO_VERSION')){
-					echo '<a class="button" style="background: black;color: white;margin: 30px 0px 0px 25px;" href="'.admin_url('admin.php?page=superpwa-upgrade').'" target="_blank">Go PRO</a>';
-				}
 			?>
 			</div>
 		</form>
