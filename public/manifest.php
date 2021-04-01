@@ -1,6 +1,6 @@
 <?php
 /**
- * Manifest related functions of SuperPWA
+ * Manifest related functions of PWA
  *
  * @since 1.0
  *
@@ -152,7 +152,7 @@ function superpwa_generate_manifest() {
  */
 function superpwa_add_manifest_to_wp_head() {
 
-	$tags  = '<!-- Manifest added by SuperPWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL;
+	$tags  = '<!-- Manifest added by PWA - Progressive Web Apps Plugin For WordPress -->' . PHP_EOL;
 	$tags .= '<link rel="manifest" href="'. parse_url( superpwa_manifest( 'src' ), PHP_URL_PATH ) . '">' . PHP_EOL;
 
 	// theme-color meta tag
@@ -165,7 +165,7 @@ function superpwa_add_manifest_to_wp_head() {
 
 	$tags  = apply_filters( 'superpwa_wp_head_tags', $tags );
 
-	$tags .= '<!-- / SuperPWA.com -->' . PHP_EOL;
+	$tags .= '<!-- / PWA.com -->' . PHP_EOL;
 
 	echo $tags;
 }

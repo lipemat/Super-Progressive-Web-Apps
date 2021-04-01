@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function superpwa_add_menu_links() {
 
 	// Main menu page
-	add_menu_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'SuperPWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render', SUPERPWA_PATH_SRC. 'admin/img/superpwa-menu-icon.png', 100 );
+	add_menu_page( __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'PWA', 'super-progressive-web-apps' ), 'manage_options', 'superpwa','superpwa_admin_interface_render', SUPERPWA_PATH_SRC. 'admin/img/superpwa-menu-icon.png', 100 );
 
 	// Settings page - Same as main menu page
 	add_submenu_page( 'superpwa', __( 'Super Progressive Web Apps', 'super-progressive-web-apps' ), __( 'Settings', 'super-progressive-web-apps' ), 'manage_options', 'superpwa', 'superpwa_admin_interface_render' );
@@ -301,7 +301,7 @@ function superpwa_get_settings() {
  */
 function superpwa_enqueue_css_js( $hook ) {
 
-    // Load only on SuperPWA plugin pages
+    // Load only on PWA plugin pages
 	if ( strpos( $hook, 'superpwa' ) === false ) {
 		return;
 	}
@@ -332,7 +332,7 @@ function superpwa_footer_text( $default ) {
 		return $default;
 	}
 
-    $superpwa_footer_text = sprintf( __( 'If you like SuperPWA, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ),
+    $superpwa_footer_text = sprintf( __( 'If you like PWA, please <a href="%s" target="_blank">make a donation</a> or leave a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating to support continued development. Thanks a bunch!', 'super-progressive-web-apps' ),
 	'https://millionclues.com/donate/',
 	'https://wordpress.org/support/plugin/super-progressive-web-apps/reviews/?rate=5#new-post'
 	);
@@ -354,6 +354,6 @@ function superpwa_footer_version( $default ) {
 		return $default;
 	}
 
-	return 'SuperPWA ' . SUPERPWA_VERSION;
+	return 'PWA ' . SUPERPWA_VERSION;
 }
 add_filter( 'update_footer', 'superpwa_footer_version', 11 );

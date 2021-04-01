@@ -5,7 +5,7 @@
  * @since 1.0
  *
  * @function	superpwa_activate_plugin()			Plugin activatation todo list
- * @function	superpwa_activation_redirect()		Redirect to SuperPWA UI on plugin activation
+ * @function	superpwa_activation_redirect()		Redirect to PWA UI on plugin activation
  * @function	superpwa_admin_notices()			Admin notices
  * @function	superpwa_network_admin_notices()	Network Admin notices
  * @function	superpwa_upgrader()					Plugin upgrade todo list
@@ -48,16 +48,16 @@ function superpwa_activate_plugin( $network_active ) {
 register_activation_hook( SUPERPWA_PATH_ABS . 'superpwa.php', 'superpwa_activate_plugin' );
 
 /**
- * Redirect to SuperPWA UI on plugin activation.
+ * Redirect to PWA UI on plugin activation.
  *
- * Will redirect to SuperPWA settings page when plugin is activated.
+ * Will redirect to PWA settings page when plugin is activated.
  * Will not redirect if multiple plugins are activated at the same time.
  * Will not redirect when activated network wide on multisite. Network admins know their way.
  *
  * @since 2.0
  */
 function superpwa_activation_redirect( $plugin, $network_wide ) {
-	// Return if not SuperPWA or if plugin is activated network wide.
+	// Return if not PWA or if plugin is activated network wide.
 	if ( $plugin !== plugin_basename( SUPERPWA_PLUGIN_FILE ) || $network_wide === true ) {
 		return false;
 	}
@@ -75,7 +75,7 @@ function superpwa_activation_redirect( $plugin, $network_wide ) {
 		return false;
 	}
 
-	// Redirect to SuperPWA settings page.
+	// Redirect to PWA settings page.
 	exit( wp_redirect( admin_url( 'admin.php?page=superpwa' ) ) );
 }
 
@@ -111,7 +111,7 @@ function superpwa_admin_notices() {
 	// Admin notice on plugin upgrade
 	if ( get_transient( 'superpwa_admin_notice_upgrade_complete' ) ) {
 
-		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>SuperPWA</strong>: Successfully updated to version %s. Thank you! <a href="%s" target="_blank">Discover new features and read the story &rarr;</a>', 'super-progressive-web-apps' ), SUPERPWA_VERSION, 'https://superpwa.com/category/release-notes/latest/?utm_source=superpwa-plugin&utm_medium=update-success-notice' ) . '</p></div>';
+		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>PWA</strong>: Successfully updated to version %s. Thank you! <a href="%s" target="_blank">Discover new features and read the story &rarr;</a>', 'super-progressive-web-apps' ), SUPERPWA_VERSION, 'https://superpwa.com/category/release-notes/latest/?utm_source=superpwa-plugin&utm_medium=update-success-notice' ) . '</p></div>';
 
 		// Delete transient
 		delete_transient( 'superpwa_admin_notice_upgrade_complete' );
@@ -145,7 +145,7 @@ function superpwa_network_admin_notices() {
 	// Network admin notice on plugin upgrade
 	if ( get_transient( 'superpwa_admin_notice_upgrade_complete' ) ) {
 
-		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>SuperPWA</strong>: Successfully updated to version %s. Thank you! <a href="%s" target="_blank">Discover new features and read the story &rarr;</a>', 'super-progressive-web-apps' ), SUPERPWA_VERSION, 'https://superpwa.com/category/release-notes/latest/?utm_source=superpwa-plugin&utm_medium=update-success-notice-multisite' ) . '</p></div>';
+		echo '<div class="updated notice is-dismissible"><p>' . sprintf( __( '<strong>PWA</strong>: Successfully updated to version %s. Thank you! <a href="%s" target="_blank">Discover new features and read the story &rarr;</a>', 'super-progressive-web-apps' ), SUPERPWA_VERSION, 'https://superpwa.com/category/release-notes/latest/?utm_source=superpwa-plugin&utm_medium=update-success-notice-multisite' ) . '</p></div>';
 
 		// Delete transient
 		delete_transient( 'superpwa_admin_notice_upgrade_complete' );
@@ -182,7 +182,7 @@ function superpwa_upgrader() {
 			superpwa_multisite_activation_status( true );
 		}
 
-		// Save SuperPWA version to database.
+		// Save PWA version to database.
 		add_option( 'superpwa_version', SUPERPWA_VERSION );
 
 		return;
@@ -224,7 +224,7 @@ function superpwa_upgrader() {
 	 */
 	if ( version_compare( $current_ver, '1.7.1', '<=' ) && class_exists( 'OneSignal' ) && ! is_multisite() ) {
 
-		// Restore the default service worker filename of SuperPWA.
+		// Restore the default service worker filename of PWA.
 		remove_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 
 		// TODO: Commenting the following line for now. Delete it later.

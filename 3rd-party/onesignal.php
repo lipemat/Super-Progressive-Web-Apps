@@ -7,9 +7,9 @@
  * @since       1.6
  *
  * @function    superpwa_onesignal_todo()                        Compatibility with OneSignal
- * @function    superpwa_onesignal_add_gcm_sender_id()            Add gcm_sender_id to SuperPWA manifest
+ * @function    superpwa_onesignal_add_gcm_sender_id()            Add gcm_sender_id to PWA manifest
  * @function    superpwa_onesignal_sw_filename()                Change Service Worker filename to OneSignalSDKWorker.js.php
- * @function    superpwa_onesignal_sw()                        Import OneSignal service worker in SuperPWA
+ * @function    superpwa_onesignal_sw()                        Import OneSignal service worker in PWA
  * @function    superpwa_onesignal_activation()                    OneSignal activation todo
  * @function    superpwa_onesignal_deactivation()                OneSignal deactivation todo
  * @function    superpwa_onesignal_admin_notices()                Admin notices for OneSignal compatibility
@@ -28,20 +28,20 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 2.0.1
  *
  * @since 1.6 but that caused issues in certain cases where
- * SuperPWA was loaded before OneSignal. Hooked everything to plugins_loaded @since 2.0.1
+ * PWA was loaded before OneSignal. Hooked everything to plugins_loaded @since 2.0.1
  */
 function superpwa_onesignal_todo() {
 	// If OneSignal is installed and active
 	if ( class_exists( 'OneSignal' ) ) {
 		// Filter manifest and service worker for singe websites and not for multisites.
 		if ( ! is_multisite() ) {
-			// Add gcm_sender_id to SuperPWA manifest
+			// Add gcm_sender_id to PWA manifest
 			add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
 
 			// Change service worker filename to match OneSignal's service worker
 			add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 
-			// Import OneSignal service worker in SuperPWA
+			// Import OneSignal service worker in PWA
 			add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
 		}
 
@@ -54,7 +54,7 @@ function superpwa_onesignal_todo() {
 add_action( 'plugins_loaded', 'superpwa_onesignal_todo' );
 
 /**
- * Add gcm_sender_id to SuperPWA manifest
+ * Add gcm_sender_id to PWA manifest
  *
  * OneSignal's gcm_sender_id is 482941778795
  *
@@ -79,7 +79,7 @@ function superpwa_onesignal_add_gcm_sender_id( $manifest ) {
  *
  * @link   https://documentation.onesignal.com/docs/web-push-setup-faq
  *
- * @param  (string) $sw_filename Filename of SuperPWA service worker passed via superpwa_sw_filename filter.
+ * @param  (string) $sw_filename Filename of PWA service worker passed via superpwa_sw_filename filter.
  *
  * @return (string) Service worker filename changed to OneSignalSDKWorker.js.php
  *
@@ -90,16 +90,16 @@ function superpwa_onesignal_sw_filename( $sw_filename ) {
 }
 
 /**
- * Import OneSignal service worker in SuperPWA
+ * Import OneSignal service worker in PWA
  *
- * @param  (string) $sw Service worker template of SuperPWA passed via superpwa_sw_template filter
+ * @param  (string) $sw Service worker template of PWA passed via superpwa_sw_template filter
  *
  * @author Arun Basil Lal
  *
  * @since  1.8
  * @since  2.0 Removed content-type header for compatibility with dynamic service workers.
  * @since  2.0.1 Added back compatibility with static service workers by sending content-type header.
- * @return (string) Import OneSignal's service worker into SuperPWA
+ * @return (string) Import OneSignal's service worker into PWA
  *
  */
 function superpwa_onesignal_sw( $sw ) {
@@ -128,9 +128,9 @@ function superpwa_onesignal_sw( $sw ) {
 /**
  * OneSignal activation todo
  *
- * Regenerates SuperPWA manifest with the gcm_sender_id added.
+ * Regenerates PWA manifest with the gcm_sender_id added.
  * Delete current service worker.
- * Regenerate SuperPWA service worker with the new filename.
+ * Regenerate PWA service worker with the new filename.
  *
  * @author Arun Basil Lal
  *
@@ -143,10 +143,10 @@ function superpwa_onesignal_activation() {
 		return;
 	}
 
-	// Filter in gcm_sender_id to SuperPWA manifest
+	// Filter in gcm_sender_id to PWA manifest
 	add_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
 
-	// Regenerate SuperPWA manifest
+	// Regenerate PWA manifest
 	superpwa_generate_manifest();
 
 	// Delete service worker if it exists
@@ -155,10 +155,10 @@ function superpwa_onesignal_activation() {
 	// Change service worker filename to match OneSignal's service worker
 	add_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 
-	// Import OneSignal service worker in SuperPWA
+	// Import OneSignal service worker in PWA
 	add_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
 
-	// Regenerate SuperPWA service worker
+	// Regenerate PWA service worker
 	superpwa_generate_sw();
 }
 
@@ -167,9 +167,9 @@ add_action( 'activate_onesignal-free-web-push-notifications/onesignal.php', 'sup
 /**
  * OneSignal deactivation todo
  *
- * Regenerates SuperPWA manifest.
+ * Regenerates PWA manifest.
  * Delete current service worker.
- * Regenerate SuperPWA service worker.
+ * Regenerate PWA service worker.
  *
  * @author Arun Basil Lal
  *
@@ -182,22 +182,22 @@ function superpwa_onesignal_deactivation() {
 		return;
 	}
 
-	// Remove gcm_sender_id from SuperPWA manifest
+	// Remove gcm_sender_id from PWA manifest
 	remove_filter( 'superpwa_manifest', 'superpwa_onesignal_add_gcm_sender_id' );
 
-	// Regenerate SuperPWA manifest
+	// Regenerate PWA manifest
 	superpwa_generate_manifest();
 
 	// Delete service worker if it exists
 	superpwa_delete_sw();
 
-	// Restore the default service worker of SuperPWA
+	// Restore the default service worker of PWA
 	remove_filter( 'superpwa_sw_filename', 'superpwa_onesignal_sw_filename' );
 
-	// Remove OneSignal service worker in SuperPWA
+	// Remove OneSignal service worker in PWA
 	remove_filter( 'superpwa_sw_template', 'superpwa_onesignal_sw' );
 
-	// Regenerate SuperPWA service worker
+	// Regenerate PWA service worker
 	superpwa_generate_sw();
 }
 
@@ -206,8 +206,8 @@ add_action( 'deactivate_onesignal-free-web-push-notifications/onesignal.php', 's
 /**
  * Admin notices for OneSignal compatibility
  *
- * One Single installs, warn users to add SuperPWA manifest as custom manifest in OneSignal settings.
- * One multisites, warn users that SuperPWA and OneSignal cannot work together.
+ * One Single installs, warn users to add PWA manifest as custom manifest in OneSignal settings.
+ * One multisites, warn users that PWA and OneSignal cannot work together.
  *
  * @since 1.8.1
  * @since 2.1 Removed the notice recommending customers to add manifest to OneSignal.
@@ -217,7 +217,7 @@ function superpwa_onesignal_admin_notices() {
 	if ( is_multisite() && current_user_can( 'manage_options' ) ) {
 		echo '<div class="notice notice-warning"><p>' .
 		     sprintf(
-			     __( '<strong>SuperPWA</strong> is not compatible with OneSignal on multisites yet. Disable one of these plugins until the compatibility is available.<br>Please refer to the <a href="%s" target="_blank">OneSignal integration documentation</a> for more info. ', 'super-progressive-web-apps' ),
+			     __( '<strong>PWA</strong> is not compatible with OneSignal on multisites yet. Disable one of these plugins until the compatibility is available.<br>Please refer to the <a href="%s" target="_blank">OneSignal integration documentation</a> for more info. ', 'super-progressive-web-apps' ),
 			     'https://superpwa.com/doc/setup-onesignal-with-superpwa/?utm_source=superpwa-plugin&utm_medium=onesignal-multisite-admin-notice#multisites'
 		     ) . '</p></div>';
 

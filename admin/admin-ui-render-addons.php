@@ -4,7 +4,7 @@
  *
  * @since 1.7
  *
- * @function 	superpwa_get_addons()					Add-ons of SuperPWA
+ * @function 	superpwa_get_addons()					Add-ons of PWA
  * @function	superpwa_addons_interface_render()		Add-Ons UI renderer
  * @function	superpwa_addons_status()				Find add-on status
  * @function	superpwa_addons_button_text()			Button text based on add-on status
@@ -17,9 +17,9 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Add-ons of SuperPWA
+ * Add-ons of PWA
  *
- * An associative array containing all the add-ons of SuperPWA.
+ * An associative array containing all the add-ons of PWA.
  * 		array(
  *			'addon-slug'	=> 	array(
  *									'name'					=> 'Add-On Name',
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * 									'admin_link'			=> admin_url( 'admin.php?page=superpwa-addon-admin-page' ),
  * 									'admin_link_text'		=> __( 'Customize settings | More Details &rarr;', 'super-progressive-web-apps' ),
  * 									'admin_link_target'		=> 'admin | external',
- * 									'superpwa_min_version'	=> '1.7' // min version of SuperPWA required to use the add-on.
+ * 									'superpwa_min_version'	=> '1.7' // min version of PWA required to use the add-on.
  *								)
  *		);
  *
@@ -132,9 +132,9 @@ function superpwa_addons_interface_render() {
 	?>
 
 	<div class="wrap">
-		<h1><?php _e( 'Add-Ons for', 'super-progressive-web-apps' ); ?> SuperPWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
+		<h1><?php _e( 'Add-Ons for', 'super-progressive-web-apps' ); ?> PWA <sup><?php echo SUPERPWA_VERSION; ?></sup></h1>
 
-		<p><?php _e( 'Add-Ons extend the functionality of SuperPWA.', 'super-progressive-web-apps' ); ?></p>
+		<p><?php _e( 'Add-Ons extend the functionality of PWA.', 'super-progressive-web-apps' ); ?></p>
 
 		<!-- Add-Ons UI -->
 		<div class="wp-list-table widefat addon-install">
@@ -197,10 +197,10 @@ function superpwa_addons_interface_render() {
 									printf( __( '<span class="compatibility-compatible"><strong>Add-On active.</strong> <a href="%s"%s>%s</a></span>', 'super-progressive-web-apps' ), $addon['admin_link'], $link_target, $addon['admin_link_text'] );
 								}
 								else if ( version_compare( SUPERPWA_VERSION, $addon['superpwa_min_version'], '>=' ) ) {
-									_e( '<span class="compatibility-compatible"><strong>Compatible</strong> with your version of SuperPWA</span>', 'super-progressive-web-apps' );
+									_e( '<span class="compatibility-compatible"><strong>Compatible</strong> with your version of PWA</span>', 'super-progressive-web-apps' );
 								}
 								else {
-									_e( '<span class="compatibility-incompatible"><strong>Please upgrade</strong> to the latest version of SuperPWA</span>', 'super-progressive-web-apps' );
+									_e( '<span class="compatibility-incompatible"><strong>Please upgrade</strong> to the latest version of PWA</span>', 'super-progressive-web-apps' );
 								} ?>
 							</div>
 						</div>
@@ -214,11 +214,11 @@ function superpwa_addons_interface_render() {
 							<div class="plugin-card-top" style="min-height: 178px;">
 
 								<div class="name column-name" style="margin: 0px 10px;">
-									<h3><?php _e( 'SuperPWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
+									<h3><?php _e( 'PWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
 								</div>
 
 								<div class="desc column-description" style="margin: 0px 10px;">
-									<p><?php _e( 'Learn more about Progressive Web Apps<br>and get latest updates about SuperPWA', 'super-progressive-web-apps' ); ?></p>
+									<p><?php _e( 'Learn more about Progressive Web Apps<br>and get latest updates about PWA', 'super-progressive-web-apps' ); ?></p>
 								</div>
 
 								<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
@@ -283,7 +283,7 @@ function superpwa_addons_status( $slug ) : string {
 
 	switch( $addon['type'] ) {
 
-		// Bundled add-ons ships with SuperPWA and need not be installed separately.
+		// Bundled add-ons ships with PWA and need not be installed separately.
 		case 'bundled':
 
 			// True means, add-on is installed and active
@@ -474,7 +474,7 @@ function superpwa_addons_handle_deactivation() {
 	// Get active add-ons
 	$active_addons = get_option( 'superpwa_active_addons', array() );
 
-	// Delete the add-on from the active_addons array in SuperPWA settings.
+	// Delete the add-on from the active_addons array in PWA settings.
 	$active_addons = array_flip( $active_addons );
 	unset( $active_addons[ $_GET['addon'] ] );
 	$active_addons = array_flip( $active_addons );

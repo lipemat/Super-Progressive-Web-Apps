@@ -1,6 +1,6 @@
 <?php
 /**
- * Service worker related functions of SuperPWA
+ * Service worker related functions of PWA
  *
  * @since       1.0
  *
