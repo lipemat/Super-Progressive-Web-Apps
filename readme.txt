@@ -177,6 +177,15 @@ Feel free to get in touch if you have any questions.
 1. Settings page in WordPress Admin > SuperPWA > Settings
 
 == Changelog ==
+= 2.5.0 =
+* Exclude `/dev` directory from caching (fixes opcache.php issue).
+* Add app shortcuts link from upstream.
+* Merge in minor fixes from upstream.
+* Improve readability in "mustCache" handling in sw.
+* Prefetch manifest file.
+* Verify successful response before storing in cache.
+* Rename all "SuperPWA" labels to "PWA".
+
 = 2.4.0 =
 * [Support Mask icons](https://github.com/SuperPWA/Super-Progressive-Web-Apps/commit/9b0e43840231077537de8b528fca25fbdc361560)
 * Latest onesignal support from upstream.
