@@ -558,7 +558,7 @@ function superpwa_admin_interface_render() {
 			?>
 			<div class="spwa-tab">
 			  <a id="spwa-default" class="spwa-tablinks" onclick="openCity(event, 'settings')">Settings</a>
-			  <a class="spwa-tablinks" onclick="openCity(event, 'advance')">Advance</a>
+			  <a class="spwa-tablinks" onclick="openCity(event, 'advance')">Advanced</a>
 			</div>
 			<div id="settings" class="spwa-tabcontent">
 			 <?php
