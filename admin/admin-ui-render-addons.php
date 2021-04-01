@@ -142,8 +142,6 @@ function superpwa_addons_interface_render() {
 			<div id="the-list">
 
 				<?php
-				// Newsletter marker. Set this to false once newsletter subscription is displayed.
-				$superpwa_newsletter = true;
 
 				// Looping over each add-on
 				foreach( $addons as $slug => $addon ) {
@@ -207,45 +205,7 @@ function superpwa_addons_interface_render() {
 
 					</div>
 
-					<?php if ( $superpwa_newsletter === true ) { ?>
-
-						<div class="plugin-card plugin-card-superpwa-newsletter" style="background: #fdfc35 url('<?php echo SUPERPWA_PATH_SRC . 'admin/img/email.png'; ?>') no-repeat right top;">
-
-							<div class="plugin-card-top" style="min-height: 178px;">
-
-								<div class="name column-name" style="margin: 0px 10px;">
-									<h3><?php _e( 'PWA Newsletter', 'super-progressive-web-apps' ); ?></h3>
-								</div>
-
-								<div class="desc column-description" style="margin: 0px 10px;">
-									<p><?php _e( 'Learn more about Progressive Web Apps<br>and get latest updates about PWA', 'super-progressive-web-apps' ); ?></p>
-								</div>
-
-								<div class="superpwa-newsletter-form" style="margin: 18px 10px 0px;">
-
-									<form method="post" action="https://superpwa.com/newsletter/" target="_blank">
-										<fieldset>
-
-											<input name="newsletter-email" value="<?php $user = wp_get_current_user(); echo esc_attr( $user->user_email ); ?>" placeholder="<?php _e( 'Enter your email', 'super-progressive-web-apps' ); ?>" style="width: 60%; margin-left: 0px;" type="email">
-											<input name="source" value="superpwa-plugin" type="hidden">
-											<input type="submit" class="button" value="<?php _e( 'Subscribe', 'super-progressive-web-apps' ); ?>" style="background: linear-gradient(to right, #fdfc35, #ffe258) !important; box-shadow: unset;">
-
-											<small style="display:block; margin-top:8px;"><?php _e( 'we\'ll share our <code>root</code> password before we share your email with anyone else.', 'super-progressive-web-apps' ); ?></small>
-
-										</fieldset>
-									</form>
-
-								</div>
-
-							</div>
-
-						</div>
-
-						<?php
-
-						// Set newsletter marker to false
-						$superpwa_newsletter = false;
-					}
+					<?php
 				} ?>
 
 			</div>
