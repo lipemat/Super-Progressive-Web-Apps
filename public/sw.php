@@ -128,7 +128,7 @@ function superpwa_sw_template() {
 					console.log( 'PWA service worker caching dependencies' );
 					var _cached = [];
 					dependencyUrls.map( function ( url ) {
-						//to prevent doubling up
+						// Prevent doubling up.
 						if ( _cached.indexOf( url ) !== -1 ) {
 							return;
 						}
@@ -203,7 +203,9 @@ function superpwa_sw_template() {
 				e.respondWith(
 					fetch( e.request ).then( function ( response ) {
 						return caches.open( cacheName ).then( function ( cache ) {
-							cache.put( e.request, response.clone() );
+							if ( 200 === response.status ) {
+								cache.put( e.request, response.clone() );
+							}
 							return response;
 						} );
 					} ).catch( function() {
@@ -231,7 +233,9 @@ function superpwa_sw_template() {
 				caches.match( e.request ).then( function ( response ) {
 					return response || fetch( e.request ).then( function ( response ) {
 						return caches.open( cacheName ).then( function ( cache ) {
-							cache.put( e.request, response.clone() );
+							if ( 200 === response.status ) {
+								cache.put( e.request, response.clone() );
+							}
 							return response;
 						} );
 					} );
