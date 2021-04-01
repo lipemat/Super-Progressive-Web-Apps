@@ -168,7 +168,7 @@ function superpwa_sw_template() {
 			if ( e.request.method !== 'GET' ) {
 				return;
 			}
-			
+
 			// Return if the current request url is in the never cache list and not a dependency.
 			if ( isURLInPatterns( neverCacheUrls, e.request.url ) && ! isMustCacheUrl( e.request.url ) ) {
 				console.log( "Current request %s is excluded from cache.", e.request.url );
